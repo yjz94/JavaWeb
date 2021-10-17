@@ -36,14 +36,30 @@ public class UserServlet extends HttpServlet {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        boolean signInResult = userService.signIn(user);
+        int signInStatus = userService.signIn(user);
 
-        RequestDispatcher requestDispatcher;
-        if (signInResult) {
-            requestDispatcher = req.getRequestDispatcher("/index.jsp");
-        } else {
-            requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
+        RequestDispatcher requestDispatcher = null;
+
+        req.setAttribute("email", user.getEmail());
+        req.setAttribute("password", user.getPassword());
+
+        switch (signInStatus) {
+            case 0:
+                req.setAttribute("SignInResult", "用户名或密码错误！");
+                requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
+                break;
+            case 1:
+                requestDispatcher = req.getRequestDispatcher("/index.jsp");
+                break;
+            case 2:
+                req.setAttribute("SignInResult", "用户名不存在！");
+                requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
+                break;
+            default:
+                req.setAttribute("SignInResult", "登录失败，请稍后重试！");
+                requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
         }
+
         requestDispatcher.forward(req, resp);
     }
 }

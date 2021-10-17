@@ -15,7 +15,7 @@ public interface UserService {
      * 用户登录
      *
      * @param user 用户信息
-     * @return true表示登陆成功，反之为失败
+     * @return 0：登录失败，账户或密码错误，1：登录成功，2：用户不存在
      */
-    boolean signIn(User user);
+    int signIn(User user);
 }

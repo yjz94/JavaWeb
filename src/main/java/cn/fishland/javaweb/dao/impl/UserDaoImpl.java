@@ -19,4 +19,14 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao {
         return query(sql, user.getEmail(), user.getPassword());
     }
 
+    @Override
+    public boolean queryByEmail(String email) {
+        String sql = "select id from user where email = ?";
+        User query = query(sql, email);
+        if (query != null) {
+            return true;
+        }
+        return false;
+    }
+
 }

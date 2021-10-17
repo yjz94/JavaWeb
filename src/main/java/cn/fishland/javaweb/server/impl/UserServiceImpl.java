@@ -21,12 +21,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean signIn(User user) {
-        User user1 = userDao.queryByEmailAndPassword(user);
-        if (user1 != null && user1.getId() != null) {
-            return true;
+    public int signIn(User user) {
+        // 查询用户是否存在
+        boolean exist = userDao.queryByEmail(user.getEmail());
+
+        if (exist) {
+            User user1 = userDao.queryByEmailAndPassword(user);
+            if (user1 != null && user1.getId() != null) {
+                return 1;
+            }
+            return 0;
         }
-        return false;
+        return 2;
     }
 
 }
