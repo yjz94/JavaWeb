@@ -129,7 +129,7 @@
                 <form action="http://localhost:8080/JavaWeb/uploadImg" target="myIframe" enctype="multipart/form-data"
                       method="post">
                     <div class="form-group">
-                        <input type="hidden" value="uploadAttachment" name="action" id="action">
+                        <input type="hidden" value="uploadImg" name="action" id="action">
                         <label for="attachmentName">名称</label>
                         <input type="text" name="attachmentName" id="attachmentName" class="form-control-file">
                         <label for="attachment">文件</label>

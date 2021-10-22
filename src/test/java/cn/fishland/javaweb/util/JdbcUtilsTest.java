@@ -2,18 +2,17 @@ package cn.fishland.javaweb.util;
 
 import cn.fishland.javaweb.bean.Attachment;
 import cn.fishland.javaweb.dao.impl.AttachmentDaoImpl;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.SQLException;
 
 /**
  * TODO
@@ -85,5 +84,23 @@ public class JdbcUtilsTest {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void testJava() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("errno", 0);
+
+        JSONArray jsonArray = new JSONArray();
+        jsonObject.put("data", jsonArray);
+
+        JSONObject attachmentJsonObject = new JSONObject();
+        attachmentJsonObject.put("url", "http://loaclhost:8080/JavaWeb/getAttachment?attachmentName=****");
+        attachmentJsonObject.put("alt", "图片文件");
+        attachmentJsonObject.put("href", "");
+
+        jsonArray.add(attachmentJsonObject);
+
+        System.out.println(jsonObject.toString());
     }
 }

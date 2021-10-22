@@ -125,30 +125,31 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <form>
+            <form action="http://localhost:8080/JavaWeb/insertArticle" method="post">
+                <input type="hidden" name="articleContent" id="articleContent"/>
                 <div class="input-group mb-3" style="margin-top: 10px;">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">标题</span>
+                        <span class="input-group-text" id="inputTitle">标题</span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Sizing example input"
-                           aria-describedby="inputGroup-sizing-default">
+                    <input name="title" id="title" type="text" class="form-control" aria-label="Sizing example input"
+                           aria-describedby="inputTitle">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">分类</span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Sizing example input"
+                    <input name="type" id="type" type="text" class="form-control" aria-label="Sizing example input"
                            aria-describedby="inputGroup-sizing-default">
                 </div>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
+                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
                 <div id="div1"></div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="submit" class="btn btn-primary"/>
             </form>
         </main>
     </div>
@@ -159,8 +160,52 @@
     const E = window.wangEditor
     const editor = new E('#div1')
     editor.config.height = 700
-    // 或者 const editor = new E( document.getElementById('div1') )
+
+    // 配置 onchange 回调函数
+    editor.config.onchange = function (newHtml) {
+        setVal(newHtml)
+    };
+
+    // 配置触发 onchange 的时间频率，默认为 200ms
+    editor.config.onchangeTimeout = 500; // 修改为 500ms
+
+    // 配置图片上传地址
+    editor.config.uploadImgServer = 'http://localhost:8080/JavaWeb/editUploadImg?action=editUploadImg'
+
+    // 默认情况下，显示所有菜单
+    editor.config.menus = [
+        'head',
+        'bold',
+        'fontSize',
+        'fontName',
+        'italic',
+        'underline',
+        'strikeThrough',
+        'indent',
+        'lineHeight',
+        'foreColor',
+        'backColor',
+        'link',
+        'list',
+        'todo',
+        'justify',
+        'quote',
+        'emoticon',
+        'image',
+        'table',
+        'code',
+        'splitLine',
+        'undo',
+        'redo',
+    ]
+
     editor.create()
+
+    // 设置内容到隐藏域
+    function setVal(newHtml) {
+        $('#articleContent').val(newHtml)
+
+    }
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

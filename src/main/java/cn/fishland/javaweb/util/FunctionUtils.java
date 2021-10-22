@@ -1,6 +1,6 @@
 package cn.fishland.javaweb.util;
 
-import java.io.File;
+import java.util.UUID;
 
 /**
  * 一些独立功能类
@@ -11,8 +11,13 @@ import java.io.File;
  */
 public class FunctionUtils {
 
-    File generateCode() {
-        // TODO 生成验证码
-        return null;
+    /**
+     * 获得UUID字符串，不含特殊符号（只含数字字母）
+     *
+     * @return UUID字符串
+     */
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
+
 }

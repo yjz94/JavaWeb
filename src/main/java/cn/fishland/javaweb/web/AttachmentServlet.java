@@ -3,6 +3,9 @@ package cn.fishland.javaweb.web;
 import cn.fishland.javaweb.bean.Attachment;
 import cn.fishland.javaweb.server.AttachmentService;
 import cn.fishland.javaweb.server.impl.AttachmentServiceImpl;
+import cn.fishland.javaweb.util.FunctionUtils;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -38,7 +41,84 @@ public class AttachmentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
 
+        String action = req.getParameter("action");
+
+        switch (action) {
+            case "uploadImg":
+                uploadImg(req, resp);
+                break;
+            case "editUploadImg":
+                editUploadImg(req, resp);
+                break;
+        }
+
+    }
+
+    private void editUploadImg(HttpServletRequest req, HttpServletResponse resp) {
+        // 判断是否是分段数据传输
+        if (ServletFileUpload.isMultipartContent(req)) {
+            try {
+                FileItemFactory fileItemFactory = new DiskFileItemFactory();
+                ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
+                servletFileUpload.setFileSizeMax(1024 * 1024);
+                servletFileUpload.setSizeMax(1024 * 1024 * 10);
+
+                List<FileItem> fileItems = servletFileUpload.parseRequest(req);
+                Blob blob = null;
+                String contentType = null;
+                for (FileItem fileItem : fileItems) {
+                    if (!fileItem.isFormField()) {
+                        InputStream inputStream = fileItem.getInputStream();
+                        ByteArrayOutputStream output = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+                        int n;
+                        while (-1 != (n = inputStream.read(buffer))) {
+                            output.write(buffer, 0, n);
+                        }
+                        blob = new SerialBlob(output.toByteArray());
+                        output.close();
+
+                        contentType = fileItem.getContentType();
+                    }
+                }
+
+                Attachment attachment = new Attachment();
+                attachment.setName(FunctionUtils.getUUID());
+                attachment.setFile(blob);
+                attachment.setType(1);
+                attachment.setStatus(1);
+                attachment.setCreateDate(new Date(System.currentTimeMillis()));
+                attachment.setUpdateDate(new Date(System.currentTimeMillis()));
+                attachment.setContentType(contentType);
+
+                attachmentService.saveAttachment(attachment);
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("errno", 0);
+                JSONArray jsonArray = new JSONArray();
+                jsonObject.put("data", jsonArray);
+                JSONObject attachmentJsonObject = new JSONObject();
+                attachmentJsonObject.put("url",
+                        "http://127.0.0.1:8080/JavaWeb/getAttachment?action=getAttachment&attachmentName=" + attachment.getName());
+                attachmentJsonObject.put("alt", "图片文件");
+                attachmentJsonObject.put("href", "");
+                jsonArray.add(attachmentJsonObject);
+
+                resp.setContentType("application/json; charset=utf-8");
+
+                System.out.println(jsonObject);
+
+                resp.getWriter().print(jsonObject);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    protected void uploadImg(HttpServletRequest req, HttpServletResponse resp) {
         // 判断是否是分段数据传输
         if (ServletFileUpload.isMultipartContent(req)) {
             try {
@@ -104,7 +184,6 @@ public class AttachmentServlet extends HttpServlet {
 
     protected void queryAttachmentList(HttpServletRequest req, HttpServletResponse resp) {
         int page = Integer.parseInt(req.getParameter("page"));
-
 
 
     }

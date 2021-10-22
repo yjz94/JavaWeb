@@ -38,5 +38,18 @@
         <servlet-name>attachment</servlet-name>
         <url-pattern>/getAttachment</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>attachment</servlet-name>
+        <url-pattern>/editUploadImg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>article</servlet-name>
+        <servlet-class>cn.fishland.javaweb.web.ArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/insertArticle</url-pattern>
+    </servlet-mapping>
 
 </web-app>
