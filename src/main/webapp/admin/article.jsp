@@ -20,6 +20,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/jquery-tagsinput.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -127,6 +128,7 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <form action="http://localhost:8080/JavaWeb/insertArticle" method="post">
                 <input type="hidden" name="articleContent" id="articleContent"/>
+
                 <div class="input-group mb-3" style="margin-top: 10px;">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputTitle">标题</span>
@@ -138,8 +140,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">分类</span>
                     </div>
-                    <input name="type" id="type" type="text" class="form-control" aria-label="Sizing example input"
-                           aria-describedby="inputGroup-sizing-default">
+                    <input type="hidden" name="tags" id="tags" data-role='tags-input'/>
                 </div>
                 <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
                 <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
@@ -221,6 +222,11 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script src="../js/dashboard.js"></script>
-
+<script src="../js/jquery-tagsinput.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('[data-role="tags-input"]').tagsInput()
+    });
+</script>
 </body>
 </html>
