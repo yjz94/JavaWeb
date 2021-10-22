@@ -30,34 +30,46 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        // 获得验证码
+        String token = (String) req.getSession().getAttribute("KAPTCHA_SESSION_KEY");
+        // 删除系统验证码
+        req.getSession().removeAttribute("KAPTCHA_SESSION_KEY");
 
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        int signInStatus = userService.signIn(user);
+        // 获得提交提交验证码
+        String code = req.getParameter("code");
 
         RequestDispatcher requestDispatcher = null;
+        if (token.equals(code)) {
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
 
-        req.setAttribute("email", user.getEmail());
-        req.setAttribute("password", user.getPassword());
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+            int signInStatus = userService.signIn(user);
 
-        switch (signInStatus) {
-            case 0:
-                req.setAttribute("SignInResult", "用户名或密码错误！");
-                requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
-                break;
-            case 1:
-                requestDispatcher = req.getRequestDispatcher("/index.jsp");
-                break;
-            case 2:
-                req.setAttribute("SignInResult", "用户名不存在！");
-                requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
-                break;
-            default:
-                req.setAttribute("SignInResult", "登录失败，请稍后重试！");
-                requestDispatcher = req.getRequestDispatcher("/web/signin.jsp");
+            req.setAttribute("email", user.getEmail());
+            req.setAttribute("password", user.getPassword());
+
+            switch (signInStatus) {
+                case 0:
+                    req.setAttribute("SignInResult", "用户名或密码错误！");
+                    requestDispatcher = req.getRequestDispatcher("/admin/signIn.jsp");
+                    break;
+                case 1:
+                    resp.sendRedirect("http://localhost:8080/JavaWeb/admin/admin.jsp");
+                    return;
+                case 2:
+                    req.setAttribute("SignInResult", "用户名不存在！");
+                    requestDispatcher = req.getRequestDispatcher("/admin/signIn.jsp");
+                    break;
+                default:
+                    req.setAttribute("SignInResult", "登录失败，请稍后重试！");
+                    requestDispatcher = req.getRequestDispatcher("/admin/signIn.jsp");
+            }
+        } else {
+            req.setAttribute("SignInResult", "验证码错误！");
+            requestDispatcher = req.getRequestDispatcher("/admin/signIn.jsp");
         }
 
         requestDispatcher.forward(req, resp);
