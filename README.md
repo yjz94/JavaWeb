@@ -9,5 +9,6 @@
 [![standard-readme compliant](https://img.shields.io/badge/Junit-5.7.1-orange)](https://github.com/fishZH/JavaWeb)
 [![standard-readme compliant](https://img.shields.io/badge/Druid-1.2.8-orange)](https://github.com/fishZH/JavaWeb)
 [![standard-readme compliant](https://img.shields.io/badge/Mysql-5.6-orange)](https://github.com/fishZH/JavaWeb)
+[![standard-readme compliant](https://img.shields.io/badge/Tomcat-8.5.7-orange)](https://github.com/fishZH/JavaWeb)
 
 JavaWeb 项目
