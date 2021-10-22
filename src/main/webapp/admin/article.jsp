@@ -199,12 +199,17 @@
         'redo',
     ]
 
+    // 类型限制
+    editor.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+
+    // 设置每次上传文件个数（默认100个）
+    editor.config.uploadImgMaxLength = 1
+
     editor.create()
 
     // 设置内容到隐藏域
     function setVal(newHtml) {
         $('#articleContent').val(newHtml)
-
     }
 </script>
 
@@ -216,7 +221,6 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <script src="../js/dashboard.js"></script>
-
 
 </body>
 </html>
