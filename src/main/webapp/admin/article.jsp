@@ -126,9 +126,9 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <form action="http://localhost:8080/JavaWeb/insertArticle" method="post">
-                <input type="hidden" name="articleContent" id="articleContent"/>
-
+            <form target="_self" action="http://localhost:8080/JavaWeb/insertArticle" method="post">
+                <input type="hidden" name="content" id="content"/>
+                <input type="hidden" name="action" id="action" value="insertArticle"/>
                 <div class="input-group mb-3" style="margin-top: 10px;">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputTitle">标题</span>
@@ -142,13 +142,6 @@
                     </div>
                     <input type="hidden" name="tags" id="tags" data-role='tags-input'/>
                 </div>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
-                <span class="badge badge-info" style="margin:5px;padding: 5px;">Info</span>
                 <div id="div1"></div>
                 <input type="submit" class="btn btn-primary"/>
             </form>
@@ -210,7 +203,7 @@
 
     // 设置内容到隐藏域
     function setVal(newHtml) {
-        $('#articleContent').val(newHtml)
+        $('#content').val(newHtml)
     }
 </script>
 

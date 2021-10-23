@@ -5,10 +5,7 @@ import cn.fishland.javaweb.util.JdbcUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,11 +49,13 @@ public abstract class BaseDao<T> {
                 for (int i = 0; i < columnCount; i++) {
                     Object object = resultSet.getObject(i + 1);
 
-                    String columnLabel = metaData.getColumnLabel(i + 1);
+                    if (object != null) {
+                        String columnLabel = metaData.getColumnLabel(i + 1);
 
-                    Field field = type.getDeclaredField(columnLabel);
-                    field.setAccessible(true);
-                    field.set(t, object);
+                        Field field = type.getDeclaredField(columnLabel);
+                        field.setAccessible(true);
+                        field.set(t, object);
+                    }
                 }
                 return t;
             }
@@ -110,6 +109,23 @@ public abstract class BaseDao<T> {
             JdbcUtils.close(connection);
         }
         return null;
+    }
+
+    protected int insert(String sql, Object... params) {
+        try {
+            Connection connection = JdbcUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+            boolean execResult = statement.execute();
+            if (execResult) {
+                return 1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 }
