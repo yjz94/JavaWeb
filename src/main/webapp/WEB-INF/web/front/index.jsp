@@ -18,9 +18,9 @@
     <title>FishLand</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../../../imgs/fishland.png" sizes="32x32" type="image/png">
 
     <style>
         .bd-placeholder-img {
@@ -33,7 +33,7 @@
         }
 
         .abstract-index {
-            background-image: url("imgs/bg.png");
+            background-image: url("../../../imgs/bg.png");
             background-position: center 0;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -70,15 +70,14 @@
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="css/album.css" rel="stylesheet">
+    <link href="../../../css/album.css" rel="stylesheet">
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="imgs/fishland.svg" width="30" height="30" alt="">
+                <img src="../../../imgs/fishland.svg" width="30" height="30" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                     aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +135,7 @@
                     <!-- Featured blog post-->
                     <div class="card mb-4">
                         <a href="#!">
-                            <img class="card-img-top" src="imgs/default.jpeg" alt="..."/>
+                            <img class="card-img-top" src="../../../imgs/default.jpeg" alt="..."/>
                         </a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2021</div>
@@ -166,7 +165,7 @@
                                 <!-- Blog post-->
                                 <div class="card mb-3">
                                     <a href="#!">
-                                        <img class="card-img-top" src="imgs/default.jpeg" alt="..."/>
+                                        <img class="card-img-top" src="../../../imgs/default.jpeg" alt="..."/>
                                     </a>
                                     <div class="card-body">
                                         <div class="small text-muted">January 1, 2021</div>
@@ -312,7 +311,7 @@
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="../../../js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script>
     (function () {

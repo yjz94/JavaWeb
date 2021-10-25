@@ -19,8 +19,8 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/jquery-tagsinput.min.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/jquery-tagsinput.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -40,7 +40,7 @@
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../../../css/dashboard.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
@@ -205,17 +205,20 @@
     function setVal(newHtml) {
         $('#content').val(newHtml)
     }
+
+    // 设置历史值
+    editor.txt.html('<p>这是主动设置的历史记录！</p>')
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../../../js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-<script src="../js/dashboard.js"></script>
-<script src="../js/jquery-tagsinput.min.js"></script>
+<script src="../../../js/dashboard.js"></script>
+<script src="../../../js/jquery-tagsinput.min.js"></script>
 <script>
     $(document).ready(function () {
         $('[data-role="tags-input"]').tagsInput()

@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -39,7 +39,7 @@
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../../../css/dashboard.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
@@ -149,7 +149,7 @@
                     %>
                     <div class="col">
                         <div class="card" style="width: 18rem; margin: 10px;">
-                            <img src="../imgs/temp1.png" class="card-img-top" alt="...">
+                            <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">attment1</h5>
                                 <p class="card-text">这是附件的简......</p>
@@ -191,11 +191,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../../../js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-<script src="../js/dashboard.js"></script>
+<script src="../../../js/dashboard.js"></script>
 
 
 </body>

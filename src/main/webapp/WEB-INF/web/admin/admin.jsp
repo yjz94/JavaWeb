@@ -19,7 +19,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         .bd-placeholder-img {
@@ -39,7 +39,7 @@
     </style>
 
     <!-- Custom styles for this template -->
-    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../../../css/dashboard.css" rel="stylesheet">
 </head>
 <body>
 
@@ -301,10 +301,10 @@
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../../../js/bootstrap.bundle.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-<script src="../js/dashboard.js"></script>
+<script src="../../../js/dashboard.js"></script>
 </body>
 </html>

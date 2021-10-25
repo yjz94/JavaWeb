@@ -52,4 +52,16 @@
         <url-pattern>/insertArticle</url-pattern>
     </servlet-mapping>
 
+    <session-config>
+        <session-timeout>20</session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>frontServlet</servlet-name>
+        <servlet-class>cn.fishland.javaweb.web.FrontServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>frontServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
 </web-app>
