@@ -20,6 +20,13 @@
     </properties>
 
     <dependencies>
+        <!-- 操作redis依赖 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.7.0</version>
+        </dependency>
+
         <!-- jsp的jstl -->
         <dependency>
             <groupId>org.apache.taglibs</groupId>
