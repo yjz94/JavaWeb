@@ -1,5 +1,7 @@
 package cn.fishland.javaweb.web;
 
+import cn.fishland.javaweb.util.FunctionUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,16 +19,10 @@ public class FrontServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String uri = req.getRequestURI();
-        String contentPath = req.getContextPath();
+        String action = FunctionUtils.getUriTail(req);
 
-        if (uri != null && contentPath != null) {
-            uri = uri.replace(contentPath, "");
-            uri = uri.substring(1);
-        }
-
-        switch (uri) {
-            case "index":
+        switch (action) {
+            case "/index":
                 index(req, resp);
                 break;
         }
