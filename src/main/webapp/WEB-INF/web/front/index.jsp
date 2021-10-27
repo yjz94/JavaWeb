@@ -7,77 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.80.0">
     <title>FishLand</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="http://127.0.0.1:8080/JavaWeb/">
+    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="icon" href="../../../imgs/fishland.png" sizes="32x32" type="image/png">
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .abstract-index {
-            background-image: url("../../../imgs/bg.png");
-            background-position: center 0;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            -webkit-background-size: cover;
-            -o-background-size: cover;
-            -moz-background-size: cover;
-            -ms-background-size: cover;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        /*表示只显示两行，并且第二行超出部分显示...*/
-        .p-show-line-3 {
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-        }
-
-        .feather {
-            width: 20px;
-            height: 20px;
-            /*stroke: #1E90FF;*/
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-    </style>
-
-    <!-- Custom styles for this template -->
-    <link href="../../../css/album.css" rel="stylesheet">
+    <!-- 前段自定义样式 -->
+    <link href="css/front.css" rel="stylesheet">
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../../../imgs/fishland.svg" width="30" height="30" alt="">
+                <img src="imgs/fishland.svg" width="30" height="30" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
                     aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +86,7 @@
                     <!-- Featured blog post-->
                     <div class="card mb-4">
                         <a href="#!">
-                            <img class="card-img-top" src="../../../imgs/default.jpeg" alt="..."/>
+                            <img class="card-img-top" src="imgs/default.jpeg" alt="..."/>
                         </a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2021</div>
@@ -165,7 +116,7 @@
                                 <!-- Blog post-->
                                 <div class="card mb-3">
                                     <a href="#!">
-                                        <img class="card-img-top" src="../../../imgs/default.jpeg" alt="..."/>
+                                        <img class="card-img-top" src="imgs/default.jpeg" alt="..."/>
                                     </a>
                                     <div class="card-body">
                                         <div class="small text-muted">January 1, 2021</div>
@@ -310,8 +261,8 @@
     </div>
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="../../../js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script>
     (function () {
