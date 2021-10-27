@@ -1,6 +1,5 @@
 package cn.fishland.javaweb.bean;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -12,9 +11,10 @@ import java.sql.Timestamp;
  */
 public class Article {
 
-    protected Integer id;
-    protected Timestamp createDate;
-    protected Timestamp updateDate;
+    private Integer id;
+    private String articleId;
+    private Timestamp createDate;
+    private Timestamp updateDate;
     private String content;
     private String title;
     private String tags;
@@ -26,6 +26,14 @@ public class Article {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public Timestamp getCreateDate() {
@@ -79,13 +87,14 @@ public class Article {
     @Override
     public String toString() {
         return "Article{" +
-                "content='" + content + '\'' +
+                "id=" + id +
+                ", articleId='" + articleId + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", content='" + content + '\'' +
                 ", title='" + title + '\'' +
                 ", tags='" + tags + '\'' +
                 ", status=" + status +
-                ", id=" + id +
-                ", createDate=" + createDate +
-                ", updateDate=" + updateDate +
                 '}';
     }
 }

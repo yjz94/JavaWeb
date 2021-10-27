@@ -17,6 +17,7 @@ public class Attachment extends BasBean {
     private Integer type;
     private Blob file;
     private String contentType;
+    private Integer master;
 
     public Attachment() {
     }
@@ -67,6 +68,14 @@ public class Attachment extends BasBean {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public Integer getMaster() {
+        return master;
+    }
+
+    public void setMaster(Integer master) {
+        this.master = master;
     }
 
     @Override
