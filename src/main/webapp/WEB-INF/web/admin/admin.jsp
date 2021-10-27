@@ -164,12 +164,15 @@
         }
     }
 
-    function iframeLoad()
-    {
-        document.getElementById("adminPage").height=0;
-
-        document.getElementById("adminPage").height=document.getElementById("adminPage").contentWindow.document.body.scrollHeight;
+    function iframeLoad() {
+        document.getElementById("adminPage").height = 0;
+        document.getElementById("adminPage").height =
+            document.getElementById("adminPage").contentWindow.document.body.scrollHeight + 50;
     }
+
+    window.onload = function () {
+        iframeLoad()
+    };
 
     // 定时触发
     // window.setInterval("reinitIframe()", 200);

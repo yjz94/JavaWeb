@@ -43,14 +43,7 @@
         <url-pattern>/editUploadImg</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>article</servlet-name>
-        <servlet-class>cn.fishland.javaweb.web.ArticleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>article</servlet-name>
-        <url-pattern>/insertArticle</url-pattern>
-    </servlet-mapping>
+
 
     <session-config>
         <session-timeout>20</session-timeout>
@@ -60,8 +53,47 @@
         <servlet-name>frontServlet</servlet-name>
         <servlet-class>cn.fishland.javaweb.web.FrontServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>adminServlet</servlet-name>
+        <servlet-class>cn.fishland.javaweb.web.AdminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>article</servlet-name>
+        <servlet-class>cn.fishland.javaweb.web.ArticleServlet</servlet-class>
+    </servlet>
+
+    <!--主页面-->
     <servlet-mapping>
         <servlet-name>frontServlet</servlet-name>
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
+
+    <!--后台主页面-->
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/admin/main</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/admin/attachment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/admin/article</url-pattern>
+    </servlet-mapping>
+
+    <!--ArticleServlet相关-->
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/API/article/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/API/article/draftSave</url-pattern>
+    </servlet-mapping>
+
 </web-app>

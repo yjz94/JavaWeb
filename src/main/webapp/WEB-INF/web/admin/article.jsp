@@ -65,7 +65,7 @@
 <script type="text/javascript">
     const E = window.wangEditor
     const editor = new E('#div1')
-    editor.config.height = 700
+    editor.config.height = 500
 
     // 配置 onchange 回调函数
     editor.config.onchange = function (newHtml) {
