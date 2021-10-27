@@ -27,19 +27,21 @@
 </head>
 <body>
 
-<form target="_self" action="http://localhost:8080/JavaWeb/insertArticle" method="post">
+<form target="_self" action="http://localhost:8080/JavaWeb/API/article/insert" method="post">
     <input type="hidden" name="articleId" id="articleId" value="${articleId}"/>
-    <input type="hidden" name="content" id="content" value="${content}"/>
+    <input type="hidden" name="content" id="content" onchange="draftSave()" value="${content}"/>
 
     <div class="form-group">
         <label for="title">标题</label>
-        <input type="text" class="form-control" name="title" id="title" value="${title}" aria-describedby="emailHelp">
+        <input type="text" class="form-control" name="title" id="title" onchange="draftSave()" value="${title}"
+               aria-describedby="emailHelp">
         <small id="titleHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
     <div class="form-group">
         <label for="tags">分类</label>
-        <input type="text" class="form-control" name="tags" id="tags" value="${tags}" aria-describedby="tagsHelp">
+        <input type="text" class="form-control" name="tags" id="tags" onchange="draftSave()" value="${tags}"
+               aria-describedby="tagsHelp">
         <small id="tagsHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
@@ -49,10 +51,15 @@
 
     <div class="form-group" style="text-align: center;">
         <button type="submit" class="btn btn-primary">提交</button>
-        <button type="submit" class="btn btn-primary">预览</button>
-        <button type="submit" class="btn btn-primary">保存</button>
+        <button type="button" class="btn btn-primary">预览</button>
+        <button type="button" class="btn btn-primary">保存</button>
     </div>
 </form>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
 
 <!-- 引入 wangEditor.min.js -->
 <script type="text/javascript">
@@ -106,28 +113,44 @@
 
     editor.create()
 
-    // 设置内容到隐藏域
-    function setVal(newHtml) {
-        $('#content').val(newHtml)
-    }
-
-    $(function () {
-        editor.txt.html(${content})
-    })()
-</script>
-
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.js"></script>
-
-<script>
     $(document).ready(function () {
         $('#tags').tagsInput({
             'height': 'auto',
             'width': 'auto'
         })
     });
+
+    $(function () {
+        editor.txt.html('${content}')
+    })
+
+    // 保存为草稿
+    function draftSave() {
+
+        // 获得title
+        const title = $('#title').val()
+        // 获得content
+        const content = $('#content').val()
+        // 获得tags
+        const tags = $('#tags').val()
+        // 获得articleId
+        const articleId = $('#articleId').val()
+
+        $.ajax({
+            type: "POST",
+            url: "API/article/draftSave",
+            data: 'articleId=' + articleId + '&content=' + content + '&title=' + title + '&tags=' + tags,
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    }
+
+    // 设置内容到隐藏域
+    function setVal(newHtml) {
+        $('#content').val(newHtml)
+    }
 </script>
 
 </body>
