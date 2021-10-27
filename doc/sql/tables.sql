@@ -35,6 +35,7 @@ CREATE TABLE `attachment`
 CREATE TABLE `article`
 (
     `id`         INT          NOT NULL AUTO_INCREMENT,
+    `articleId`  varchar(50)  NOT NULL UNIQUE,
     `title`      VARCHAR(100) NOT NULL,
     `content`    TEXT         NOT NULL,
     `createDate` TIMESTAMP    NOT NULL,
