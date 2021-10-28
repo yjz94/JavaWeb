@@ -76,7 +76,7 @@
     editor.config.onchangeTimeout = 500; // 修改为 500ms
 
     // 配置图片上传地址
-    editor.config.uploadImgServer = 'http://localhost:8080/JavaWeb/editUploadImg?action=editUploadImg'
+    editor.config.uploadImgServer = 'API/attachment/insert/editor'
 
     // 默认情况下，显示所有菜单
     editor.config.menus = [
@@ -110,6 +110,9 @@
 
     // 设置每次上传文件个数（默认100个）
     editor.config.uploadImgMaxLength = 1
+
+    // 设置图片上传自定义参数
+    editor.config.uploadImgParams = {'master': $('#articleId').val()}
 
     editor.create()
 

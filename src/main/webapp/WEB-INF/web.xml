@@ -17,6 +17,7 @@
         <url-pattern>/userPost</url-pattern>
     </servlet-mapping>
 
+    <!--（谷歌验证码）第三方依赖-->
     <servlet>
         <servlet-name>kaptchaServlet</servlet-name>
         <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
@@ -42,7 +43,6 @@
         <servlet-name>attachment</servlet-name>
         <url-pattern>/editUploadImg</url-pattern>
     </servlet-mapping>
-
 
 
     <session-config>
@@ -94,6 +94,12 @@
     <servlet-mapping>
         <servlet-name>article</servlet-name>
         <url-pattern>/API/article/draftSave</url-pattern>
+    </servlet-mapping>
+
+    <!--AttachmentServlet相关-->
+    <servlet-mapping>
+        <servlet-name>attachment</servlet-name>
+        <url-pattern>/API/attachment/insert/editor</url-pattern>
     </servlet-mapping>
 
 </web-app>
