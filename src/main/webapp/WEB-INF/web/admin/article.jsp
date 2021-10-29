@@ -26,21 +26,20 @@
     <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
 <body>
-
 <form target="_self" action="http://localhost:8080/JavaWeb/API/article/insert" method="post">
     <input type="hidden" name="articleId" id="articleId" value="${articleId}"/>
-    <input type="hidden" name="content" id="content" onchange="draftSave()" value="${content}"/>
+    <input type="hidden" name="content" id="content"/>
 
     <div class="form-group">
         <label for="title">标题</label>
-        <input type="text" class="form-control" name="title" id="title" onchange="draftSave()" value="${title}"
+        <input type="text" class="form-control" name="title" id="title" value="${title}"
                aria-describedby="emailHelp">
         <small id="titleHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
     <div class="form-group">
         <label for="tags">分类</label>
-        <input type="text" class="form-control" name="tags" id="tags" onchange="draftSave()" value="${tags}"
+        <input type="text" class="form-control" name="tags" id="tags" value="${tags}"
                aria-describedby="tagsHelp">
         <small id="tagsHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
@@ -50,12 +49,13 @@
     </div>
 
     <div class="form-group" style="text-align: center;">
-        <button type="submit" class="btn btn-primary">提交</button>
-        <button type="button" class="btn btn-primary">预览</button>
-        <button type="button" class="btn btn-primary">保存</button>
+        <button type="submit" class="btn btn-primary" onclick="insertArticle()">提交</button>
+        <button type="button" class="btn btn-primary" onclick="waitCon()">预览</button>
+        <button type="submit" class="btn btn-primary" onclick="draftSave()">保存</button>
     </div>
 </form>
-
+<%--添加一个隐藏的iframe可以让form在提交时避免跳转--%>
+<iframe id="hiddenIframe" name="hiddenIframe" style="display: none;" class="iframes"></iframe>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
@@ -127,32 +127,24 @@
         editor.txt.html('${content}')
     })
 
-    // 保存为草稿
-    function draftSave() {
-
-        // 获得title
-        const title = $('#title').val()
-        // 获得content
-        const content = $('#content').val()
-        // 获得tags
-        const tags = $('#tags').val()
-        // 获得articleId
-        const articleId = $('#articleId').val()
-
-        $.ajax({
-            type: "POST",
-            url: "API/article/draftSave",
-            data: 'articleId=' + articleId + '&content=' + content + '&title=' + title + '&tags=' + tags,
-            dataType: "json",
-            success: function (data) {
-                console.log(data)
-            }
-        });
-    }
-
     // 设置内容到隐藏域
     function setVal(newHtml) {
+        // 使用函数名 filterXSS，用法一样
         $('#content').val(newHtml)
+    }
+
+    // 保存为草稿
+    function draftSave() {
+        $('form').attr("action", "http://localhost:8080/JavaWeb/API/article/insert/draft");
+    }
+
+    // 保存文章
+    function insertArticle() {
+        $('form').attr("action", "http://localhost:8080/JavaWeb/API/article/insert");
+    }
+
+    function waitCon() {
+        alert("还在建设中......");
     }
 </script>
 

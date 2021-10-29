@@ -37,11 +37,12 @@ public class ArticleServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String tail = FunctionUtils.getUriTail(req);
+
         switch (tail) {
             case "/API/article/insert":
                 insert(req, resp);
                 break;
-            case "/API/article/draftSave":
+            case "/API/article/insert/draft":
                 draftSave(req, resp);
                 break;
             default:
@@ -73,8 +74,8 @@ public class ArticleServlet extends HttpServlet {
                 RedisUtil.setHash(articleId, hashMap);
             }
 
-            resp.getWriter().print("{'err':0,'msg':''}");
-        } catch (IOException e) {
+            new AdminServlet().doGet(req, resp);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -86,24 +87,34 @@ public class ArticleServlet extends HttpServlet {
      * @param resp {@link javax.servlet.http.HttpServletResponse}
      */
     private void insert(HttpServletRequest req, HttpServletResponse resp) {
-        String title = req.getParameter("title");
-        String tags = req.getParameter("tags");
-        String content = req.getParameter("content");
+        try {
+            // 获得字段内容
+            String title = req.getParameter("title");
+            String tags = req.getParameter("tags");
+            String content = req.getParameter("content");
+            String articleId = req.getParameter("articleId");
 
-        Article article = new Article();
-        article.setStatus(1);
-        article.setContent(content);
-        article.setTitle(title);
-        article.setTags(tags);
-        article.setCreateDate(new Timestamp(System.currentTimeMillis()));
-        article.setUpdateDate(new Timestamp(System.currentTimeMillis()));
+            Article article = new Article();
+            article.setArticleId(articleId);
+            article.setStatus(1);
+            article.setContent(content);
+            article.setTitle(title);
+            article.setTags(tags);
+            article.setCreateDate(new Timestamp(System.currentTimeMillis()));
+            article.setUpdateDate(new Timestamp(System.currentTimeMillis()));
 
-        boolean save = articleService.save(article);
+            // 保存内容到数据库中
+            boolean save = articleService.save(article);
 
-        if (save) {
-            req.setAttribute("result", "{'error':1,'msg':'保存文章失败！'}");
+            // 删除redis中草稿
+            RedisUtil.del(articleId);
+            RedisUtil.del(StaticField.ARTICLE_TEMP_UUID_KEY);
+            RedisUtil.del(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
+
+            new AdminServlet().doGet(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 
 }

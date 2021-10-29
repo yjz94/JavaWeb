@@ -15,8 +15,8 @@ public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
 
     @Override
     public int save(Article article) {
-        String sql = "insert into article(`title`,`content`,`createDate`,`status`) values(?,?,?,?)";
-        return insert(sql, article.getTitle(), article.getContent(), article.getCreateDate(), article.getStatus());
+        String sql = "insert into article(`articleId`,`title`,`content`,`createDate`,`status`) values(?,?,?,?,?)";
+        return insert(sql, article.getArticleId(), article.getTitle(), article.getContent(), article.getCreateDate(), article.getStatus());
     }
 
     @Override

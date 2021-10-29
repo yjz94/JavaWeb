@@ -5,8 +5,6 @@ import cn.fishland.javaweb.dao.AttachmentDao;
 import cn.fishland.javaweb.dao.BaseDao;
 import cn.fishland.javaweb.util.JdbcUtils;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.*;
 
 /**
@@ -88,6 +86,20 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
             JdbcUtils.close(connection);
         }
         return null;
+    }
+
+    @Override
+    public int deleteAttachment(String... names) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("delete from attachment where 1=0 ");
+        for (String name : names) {
+            stringBuilder.append("or name = ? ");
+        }
+        boolean delete = delete(stringBuilder.toString(), names);
+        if (delete) {
+            return names.length;
+        }
+        return -1;
     }
 
 }

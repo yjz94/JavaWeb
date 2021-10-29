@@ -27,4 +27,13 @@ public interface AttachmentDao {
      * @return 文件实体类
      */
     Attachment queryAttachment(String attachmentName);
+
+    /**
+     * 根据附件名称删除附件
+     *
+     * @param names 附加name数组
+     * @return 成功数量
+     */
+    int deleteAttachment(String... names);
+
 }

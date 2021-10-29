@@ -112,8 +112,9 @@ public abstract class BaseDao<T> {
     }
 
     protected int insert(String sql, Object... params) {
+        Connection connection = null;
         try {
-            Connection connection = JdbcUtils.getConnection();
+            connection = JdbcUtils.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
                 statement.setObject(i + 1, params[i]);
@@ -124,8 +125,26 @@ public abstract class BaseDao<T> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            JdbcUtils.close(connection);
         }
         return 0;
     }
 
+    protected boolean delete(String sql, Object... params) {
+        Connection connection = null;
+        try {
+            connection = JdbcUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+            return statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.close(connection);
+        }
+        return false;
+    }
 }

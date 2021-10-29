@@ -5,6 +5,7 @@ import cn.fishland.javaweb.server.AttachmentService;
 import cn.fishland.javaweb.server.impl.AttachmentServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.RedisUtil;
+import cn.fishland.javaweb.util.StaticField;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.beanutils2.ConvertUtils;
@@ -104,7 +105,7 @@ public class AttachmentServlet extends HttpServlet {
                 jsonArray.add(attachmentJsonObject);
 
                 // 保存redis(文章上传的图片可能中途会删除最终不会使用)
-                RedisUtil.setLPush("attachments", attachment.getName());
+                RedisUtil.setLPush(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST, attachment.getName());
             } else {
                 jsonObject.put("errno", 1);
                 jsonObject.put("data", null);
