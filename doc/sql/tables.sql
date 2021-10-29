@@ -27,7 +27,7 @@ CREATE TABLE `attachment`
     `type`        INT          NOT NULL,
     `file`        LONGBLOB     NOT NULL COMMENT '存放文件二进制内容',
     `contentType` VARCHAR(100) NOT NULL COMMENT '文件的类型',
-    `master`      INT COMMENT '关联的主要内容',
+    `master`      varchar(50) COMMENT '关联的主要内容',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
