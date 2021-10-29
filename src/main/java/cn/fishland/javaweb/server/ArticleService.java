@@ -20,12 +20,12 @@ public interface ArticleService {
     boolean save(Article article);
 
     /**
-     * 根据id查询文章内容
+     * 根据articleId查询文章内容
      *
-     * @param id 文章id
+     * @param articleId 文章articleId
      * @return 内容对象
      */
-    Article getArticleById(Integer id);
+    Article getArticleByArticleId(String articleId);
 
 
 }

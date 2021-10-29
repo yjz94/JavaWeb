@@ -1,8 +1,11 @@
 package cn.fishland.javaweb.web;
 
 import cn.fishland.javaweb.bean.Article;
+import cn.fishland.javaweb.bean.Praise;
 import cn.fishland.javaweb.server.ArticleService;
+import cn.fishland.javaweb.server.PraiseService;
 import cn.fishland.javaweb.server.impl.ArticleServiceImpl;
+import cn.fishland.javaweb.server.impl.PraiseServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.RedisUtil;
 import cn.fishland.javaweb.util.StaticField;
@@ -27,17 +30,17 @@ import java.util.Map;
 public class ArticleServlet extends HttpServlet {
 
     private static final ArticleService articleService;
+    private static final PraiseService praiseService;
 
     static {
         articleService = new ArticleServiceImpl();
+        praiseService = new PraiseServiceImpl();
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-
         String tail = FunctionUtils.getUriTail(req);
-
         switch (tail) {
             case "/API/article/insert":
                 insert(req, resp);
@@ -47,7 +50,18 @@ public class ArticleServlet extends HttpServlet {
                 break;
             default:
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        String tail = FunctionUtils.getUriTail(req);
+        switch (tail) {
+            case "/API/article/get":
+                getArticle(req, resp);
+                break;
+            default:
+        }
     }
 
     /**
@@ -112,6 +126,31 @@ public class ArticleServlet extends HttpServlet {
             RedisUtil.del(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
 
             new AdminServlet().doGet(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getArticle(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            // 获得文章articleId
+            String articleId = req.getParameter("articleId");
+            Article article = articleService.getArticleByArticleId(articleId);
+
+            // 获得文章praise
+            Praise praise = new Praise();
+            Praise queryPraise = praiseService.getPraiseByMaster(articleId);
+            if (queryPraise != null) {
+                praise = queryPraise;
+            }
+
+            req.setAttribute("article", article);
+            req.setAttribute("praise", praise);
+
+            System.out.println(article);
+            System.out.println(praise);
+
+            req.getRequestDispatcher("/WEB-INF/web/common/showArticle.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -15,8 +15,9 @@ public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
 
     @Override
     public int save(Article article) {
-        String sql = "insert into article(`articleId`,`title`,`content`,`createDate`,`status`) values(?,?,?,?,?)";
-        return insert(sql, article.getArticleId(), article.getTitle(), article.getContent(), article.getCreateDate(), article.getStatus());
+        String sql = "insert into article(`articleId`,`title`,`content`,`createDate`,`tags`,`status`) values(?,?,?,?,?,?)";
+        return insert(sql, article.getArticleId(), article.getTitle(), article.getContent(), article.getCreateDate(),
+                article.getTags(), article.getStatus());
     }
 
     @Override
@@ -33,5 +34,11 @@ public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
     public Article queryById(Integer id) {
         String sql = "select * from article where id = ?";
         return query(sql, id);
+    }
+
+    @Override
+    public Article queryByArticleId(String articleId) {
+        String sql = "select * from article where articleId = ?";
+        return query(sql, articleId);
     }
 }

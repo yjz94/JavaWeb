@@ -43,4 +43,12 @@ public interface ArticleDao {
      */
     Article queryById(Integer id);
 
+    /**
+     * 根据文章articleId查询文章
+     *
+     * @param articleId 文章rticleId
+     * @return 文章对象，不存在返回null
+     */
+    Article queryByArticleId(String articleId);
+
 }

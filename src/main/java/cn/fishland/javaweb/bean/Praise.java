@@ -14,10 +14,10 @@ public class Praise {
     private Integer id;
     private Timestamp createDate;
     private Timestamp updateDate;
-    private Integer thumbsUp;
-    private Integer read;
-    private Integer thumbsDown;
-    private Integer message;
+    private Integer thumbsUp = 0;
+    private Integer read = 0;
+    private Integer thumbsDown = 0;
+    private Integer message = 0;
     private Integer status;
     private String master;
 

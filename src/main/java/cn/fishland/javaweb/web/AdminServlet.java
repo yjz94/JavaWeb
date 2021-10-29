@@ -35,12 +35,9 @@ public class AdminServlet extends HttpServlet {
                 attachment(req, resp);
                 break;
             case "/admin/article":
-            case "/API/article/insert/draft":
-            case "/API/article/insert":
                 article(req, resp);
                 break;
             default:
-
         }
     }
 

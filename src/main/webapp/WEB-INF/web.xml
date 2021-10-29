@@ -95,6 +95,10 @@
         <servlet-name>article</servlet-name>
         <url-pattern>/API/article/insert/draft</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/API/article/get</url-pattern>
+    </servlet-mapping>
 
     <!--AttachmentServlet相关-->
     <servlet-mapping>

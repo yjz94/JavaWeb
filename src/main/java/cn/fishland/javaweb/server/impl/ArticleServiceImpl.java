@@ -7,6 +7,7 @@ import cn.fishland.javaweb.dao.impl.ArticleDaoImpl;
 import cn.fishland.javaweb.dao.impl.AttachmentDaoImpl;
 import cn.fishland.javaweb.server.ArticleService;
 import cn.fishland.javaweb.util.FunctionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -43,8 +44,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article getArticleById(Integer id) {
-        return articleDao.queryById(id);
+    public Article getArticleByArticleId(String articleId) {
+        if (StringUtils.isNotBlank(articleId)) {
+            return articleDao.queryByArticleId(articleId);
+        }
+        return null;
     }
 
 }
