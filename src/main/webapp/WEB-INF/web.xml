@@ -48,6 +48,9 @@
     <session-config>
         <session-timeout>20</session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>/index</welcome-file>
+    </welcome-file-list>
 
     <servlet>
         <servlet-name>frontServlet</servlet-name>
@@ -66,6 +69,10 @@
     <servlet-mapping>
         <servlet-name>frontServlet</servlet-name>
         <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>frontServlet</servlet-name>
+        <url-pattern>/article</url-pattern>
     </servlet-mapping>
 
     <!--后台主页面-->

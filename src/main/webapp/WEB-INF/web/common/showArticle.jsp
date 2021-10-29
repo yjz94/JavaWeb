@@ -21,7 +21,7 @@
 <div style="padding: 10px;">
     <h1>${article.title}</h1>
 </div>
-<div style="background-color: #e9ecef;padding: 10px;margin-top: 10px; border-radius: 5px;">
+<div style="padding: 10px;margin-top: 10px; border-radius: 5px;">
     <div class="bar-content">
         <span class="time">${article.createDate}</span>
 
