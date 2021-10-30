@@ -1,7 +1,5 @@
 package cn.fishland.javaweb.bean;
 
-import java.sql.Timestamp;
-
 /**
  * 储存文章对象
  *
@@ -9,24 +7,13 @@ import java.sql.Timestamp;
  * @version 1.0
  * @date 2021/10/23 10:46 上午
  */
-public class Article {
+public class Article extends BasBean {
 
-    private Integer id;
     private String articleId;
-    private Timestamp createDate;
-    private Timestamp updateDate;
     private String content;
     private String title;
     private String tags;
     private Integer status;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getArticleId() {
         return articleId;
@@ -34,22 +21,6 @@ public class Article {
 
     public void setArticleId(String articleId) {
         this.articleId = articleId;
-    }
-
-    public Timestamp getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
-    }
-
-    public Timestamp getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Timestamp updateDate) {
-        this.updateDate = updateDate;
     }
 
     public String getContent() {

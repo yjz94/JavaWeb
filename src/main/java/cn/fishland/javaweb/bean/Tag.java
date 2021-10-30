@@ -36,4 +36,16 @@ public class Tag extends BasBean {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", name='" + name + '\'' +
+                ", master='" + master + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

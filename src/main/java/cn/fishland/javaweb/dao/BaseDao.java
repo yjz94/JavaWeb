@@ -52,7 +52,12 @@ public abstract class BaseDao<T> {
                     if (object != null) {
                         String columnLabel = metaData.getColumnLabel(i + 1);
 
-                        Field field = type.getDeclaredField(columnLabel);
+                        Field field = null;
+                        try {
+                            field = type.getDeclaredField(columnLabel);
+                        } catch (Exception e) {
+                            field = type.getSuperclass().getDeclaredField(columnLabel);
+                        }
                         field.setAccessible(true);
                         field.set(t, object);
                     }

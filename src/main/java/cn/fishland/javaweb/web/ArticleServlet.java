@@ -88,11 +88,12 @@ public class ArticleServlet extends HttpServlet {
                 RedisUtil.setHash(articleId, hashMap);
             }
 
-            new AdminServlet().doGet(req, resp);
+            article(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * 保存article内容
@@ -125,7 +126,7 @@ public class ArticleServlet extends HttpServlet {
             RedisUtil.del(StaticField.ARTICLE_TEMP_UUID_KEY);
             RedisUtil.del(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
 
-            new AdminServlet().doGet(req, resp);
+            article(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,4 +157,39 @@ public class ArticleServlet extends HttpServlet {
         }
     }
 
+    private void article(HttpServletRequest req, HttpServletResponse resp) {
+
+        // 先判断是否存在草稿（redis中）
+        if (RedisUtil.exist(StaticField.ARTICLE_TEMP_UUID_KEY)) {
+            // 文章articleId
+            String articleId = RedisUtil.getString(StaticField.ARTICLE_TEMP_UUID_KEY);
+
+            // 保存到与对象中
+
+            // 文章articleId
+            req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, articleId);
+
+            // 文章标题
+            req.setAttribute(StaticField.ARTICLE_TEMP_TITLE_FIELD,
+                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TITLE_FIELD));
+
+            // 文章内容
+            req.setAttribute(StaticField.ARTICLE_TEMP_CONTENT_FIELD,
+                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_CONTENT_FIELD));
+
+            // 文章标签
+            req.setAttribute(StaticField.ARTICLE_TEMP_TAGS_FIELD,
+                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TAGS_FIELD));
+
+        } else {
+            // 文章articleId
+            req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, FunctionUtils.getUUID());
+        }
+
+        try {
+            req.getRequestDispatcher("/WEB-INF/web/admin/article.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

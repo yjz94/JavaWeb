@@ -1,7 +1,5 @@
 package cn.fishland.javaweb.bean;
 
-import java.sql.Timestamp;
-
 /**
  * 文章点赞等交互数据
  *
@@ -9,41 +7,14 @@ import java.sql.Timestamp;
  * @version 1.0
  * @date 2021/10/24 11:20 下午
  */
-public class Praise {
+public class Praise extends BasBean {
 
-    private Integer id;
-    private Timestamp createDate;
-    private Timestamp updateDate;
     private Integer thumbsUp = 0;
     private Integer read = 0;
     private Integer thumbsDown = 0;
     private Integer message = 0;
     private Integer status;
     private String master;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Timestamp getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
-    }
-
-    public Timestamp getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Timestamp updateDate) {
-        this.updateDate = updateDate;
-    }
 
     public Integer getThumbsUp() {
         return thumbsUp;

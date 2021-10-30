@@ -7,9 +7,8 @@ package cn.fishland.javaweb.bean;
  * @version 1.0
  * @date 2021/10/17 10:50 上午
  */
-public class User {
+public class User extends BasBean {
 
-    private Integer id;
     private String name;
     private String email;
     private String password;
@@ -33,14 +32,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.status = status;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -95,11 +86,14 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", code='" + code + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 }
