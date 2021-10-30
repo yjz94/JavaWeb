@@ -25,7 +25,7 @@ public class AdminServlet extends HttpServlet {
         String action = FunctionUtils.getUriTail(req);
 
         switch (action) {
-            case "/admin":
+            case "/admin/index":
                 admin(req, resp);
                 break;
             case "/admin/main":
@@ -37,7 +37,18 @@ public class AdminServlet extends HttpServlet {
             case "/admin/article":
                 article(req, resp);
                 break;
+            case "/admin/login":
+                login(req, resp);
+                break;
             default:
+        }
+    }
+
+    private void login(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            req.getRequestDispatcher("/WEB-INF/web/admin/login.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

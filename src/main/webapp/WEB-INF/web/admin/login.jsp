@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="zh">
 <head>
@@ -19,22 +20,19 @@
     <!-- Custom styles -->
     <link href="css/signin.css" rel="stylesheet">
 
-    <title>登录 - FishLand</title>
+    <title>Login - FishLand</title>
 </head>
 <body class="text-center">
-<form class="form-signin" action="signIn" method="post">
+<form class="form-signin" action="API/user/verify" method="post">
     <img class="mb-4" src="imgs/fishland.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">登陆</h1>
 
-    <%
-        if (request.getAttribute("SignInResult") != null) {
-    %>
-    <div class="alert alert-danger" role="alert">
-        ${requestScope.SignInResult}
-    </div>
-    <%
-        }
-    %>
+    <c:if test="${requestScope.message != null}">
+        <div class="alert alert-danger" role="alert">
+                ${requestScope.message}
+        </div>
+    </c:if>
+
     <label for="email" class="sr-only">Email</label>
     <input type="email" value="${requestScope.email}" name="email" id="email" class="form-control" placeholder="邮箱"
            required autofocus>
@@ -59,8 +57,7 @@
 </form>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 

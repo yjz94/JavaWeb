@@ -3,12 +3,14 @@ USE
 /*用户表*/
 CREATE TABLE `user`
 (
-    `id`       INT         NOT NULL AUTO_INCREMENT,
-    `name`     VARCHAR(20) NOT NULL UNIQUE,
-    `email`    VARCHAR(50) NOT NULL UNIQUE,
-    `password` VARCHAR(50) NOT NULL,
-    `status`   INT         NOT NULL,
-    `photo`    LONGBLOB,
+    `id`         INT         NOT NULL AUTO_INCREMENT,
+    `createDate` TIMESTAMP   NOT NULL,
+    `updateDate` TIMESTAMP,
+    `name`       VARCHAR(20) NOT NULL UNIQUE,
+    `email`      VARCHAR(50) NOT NULL UNIQUE,
+    `password`   VARCHAR(50) NOT NULL,
+    `status`     INT         NOT NULL,
+    `photo`      LONGBLOB,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -42,6 +44,7 @@ CREATE TABLE `article`
     `content`    TEXT         NOT NULL,
     `createDate` TIMESTAMP    NOT NULL,
     `updateDate` TIMESTAMP,
+    `tags`       VARCHAR(200) NOT NULL,
     `status`     INT          NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB

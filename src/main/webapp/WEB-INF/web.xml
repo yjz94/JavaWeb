@@ -4,19 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>cn.fishland.javaweb.web.UserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/signIn</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/userPost</url-pattern>
-    </servlet-mapping>
-
     <!--（谷歌验证码）第三方依赖-->
     <servlet>
         <servlet-name>kaptchaServlet</servlet-name>
@@ -64,6 +51,14 @@
         <servlet-name>article</servlet-name>
         <servlet-class>cn.fishland.javaweb.web.ArticleServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>cn.fishland.javaweb.web.UserServlet</servlet-class>
+    </servlet>
+    <filter>
+        <filter-name>adminFilter</filter-name>
+        <filter-class>cn.fishland.javaweb.web.filter.AdminFilter</filter-class>
+    </filter>
 
     <!--主页面-->
     <servlet-mapping>
@@ -92,6 +87,10 @@
         <servlet-name>adminServlet</servlet-name>
         <url-pattern>/admin/article</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
 
     <!--ArticleServlet相关-->
     <servlet-mapping>
@@ -112,5 +111,18 @@
         <servlet-name>attachment</servlet-name>
         <url-pattern>/API/attachment/insert/editor</url-pattern>
     </servlet-mapping>
+
+    <!--UserServlet相关-->
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/API/user/verify</url-pattern>
+    </servlet-mapping>
+
+    <!--AdminFilter过滤-->
+    <filter-mapping>
+        <filter-name>adminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
 
 </web-app>
