@@ -108,14 +108,6 @@
             <version>${druid-version}</version>
         </dependency>
 
-        <!--servlet依赖-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!--测试框架-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
