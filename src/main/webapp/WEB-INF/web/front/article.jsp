@@ -17,6 +17,11 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 代码高亮 highlight CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/base16/default-light.min.css"
+          rel="stylesheet">
+
     <!-- 自定义样式 -->
     <style>
         .bd-placeholder-img {
@@ -53,7 +58,7 @@
 
         @media (min-width: 768px) {
             .article-jumbotron {
-                padding-bottom: 6rem;
+                padding-bottom: 4rem;
             }
         }
 
@@ -144,10 +149,16 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+
+<script></script>
 <script>
     (function () {
         // 开启feather图标的渲染
         feather.replace()
+
+        // 开启highlight代码高亮
+        hljs.highlightAll()
     })()
 </script>
 </body>

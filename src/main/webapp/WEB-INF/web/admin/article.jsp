@@ -26,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
 <body>
-<form target="_self" action="http://localhost:8080/JavaWeb/API/article/insert" method="post">
+<form action="http://localhost:8080/JavaWeb/API/article/insert" method="post">
     <input type="hidden" name="articleId" id="articleId" value="${articleId}"/>
     <input type="hidden" name="content" id="content"/>
 
@@ -45,7 +45,9 @@
     </div>
 
     <div class="form-group">
-        <div id="div1"></div>
+        <div id="div1">
+            ${content}
+        </div>
     </div>
 
     <div class="form-group" style="text-align: center;">
@@ -120,12 +122,14 @@
         $('#tags').tagsInput({
             'height': 'auto',
             'width': 'auto'
-        })
+        });
+
+        setVal(editor.txt.html())
     });
 
-    $(function () {
-        editor.txt.html('${content}')
-    })
+    /*$(function () {
+        editor.txt.html('')
+    })*/
 
     // 设置内容到隐藏域
     function setVal(newHtml) {
