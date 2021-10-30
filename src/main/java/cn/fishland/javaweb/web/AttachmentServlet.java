@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -84,8 +85,8 @@ public class AttachmentServlet extends HttpServlet {
                 attachment.setName(FunctionUtils.getUUID());
                 attachment.setType(1);
                 attachment.setStatus(1);
-                attachment.setCreateDate(new Date(System.currentTimeMillis()));
-                attachment.setUpdateDate(new Date(System.currentTimeMillis()));
+                attachment.setCreateDate(new Timestamp(System.currentTimeMillis()));
+                attachment.setUpdateDate(new Timestamp(System.currentTimeMillis()));
 
                 saveResult = attachmentService.saveAttachment(attachment);
             }
@@ -155,8 +156,8 @@ public class AttachmentServlet extends HttpServlet {
                 attachment.setFile(blob);
                 attachment.setType(1);
                 attachment.setStatus(1);
-                attachment.setCreateDate(new Date(System.currentTimeMillis()));
-                attachment.setUpdateDate(new Date(System.currentTimeMillis()));
+                attachment.setCreateDate(new Timestamp(System.currentTimeMillis()));
+                attachment.setUpdateDate(new Timestamp(System.currentTimeMillis()));
                 attachment.setContentType(contentType);
 
                 attachmentService.saveAttachment(attachment);

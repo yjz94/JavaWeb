@@ -7,9 +7,10 @@ package cn.fishland.javaweb.bean;
  * @version 1.0
  * @date 2021/10/24 11:22 下午
  */
-public class Tag {
+public class Tag extends BasBean {
 
     private String name;
+    private String master;
     private Integer status;
 
     public String getName() {
@@ -18,6 +19,14 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMaster() {
+        return master;
+    }
+
+    public void setMaster(String master) {
+        this.master = master;
     }
 
     public Integer getStatus() {

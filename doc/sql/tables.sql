@@ -47,7 +47,6 @@ CREATE TABLE `article`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-
 /*文章交互数据表*/
 CREATE TABLE `praise`
 (
@@ -66,3 +65,22 @@ CREATE TABLE `praise`
 
 INSERT INTO praise(`createDate`, `thumbsUp`, `read`, `thumbsDown`, `message`, `master`, `status`)
 values ('2021-12-12 12:12:12', '12', '323', '43', '999', '5135173ade88467ea1de66edde0e6f2e', '1');
+
+
+/*文章标签表*/
+CREATE TABLE `tag`
+(
+    `id`         INT         NOT NULL AUTO_INCREMENT,
+    `createDate` TIMESTAMP   NOT NULL,
+    `updateDate` TIMESTAMP,
+    `name`       varchar(50) NOT NULL UNIQUE,
+    `master`     varchar(50) NOT NULL,
+    `status`     INT         NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+INSERT INTO tag(`createDate`, `name`, `master`, `status`)
+values ('2021-12-12 12:12:12', 'Java', '5135173ade88467ea1de66edde0e6f2e', '1'),
+       ('2021-12-12 12:12:12', 'CSS', '5135173ade88467ea1de66edde0e6f2e', '1'),
+       ('2021-12-12 12:12:12', 'Html', '5135173ade88467ea1de66edde0e6f2e', '1');

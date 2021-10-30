@@ -26,7 +26,7 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setString(1, attachment.getName());
-            statement.setDate(2, attachment.getCreateDate());
+            statement.setTimestamp(2, attachment.getCreateDate());
             statement.setInt(3, attachment.getStatus());
             statement.setInt(4, attachment.getType());
             statement.setBlob(5, attachment.getFile());
@@ -61,8 +61,8 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
 
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                Date createDate = resultSet.getDate("createDate");
-                Date updateDate = resultSet.getDate("updateDate");
+                Timestamp createDate = resultSet.getTimestamp("createDate");
+                Timestamp updateDate = resultSet.getTimestamp("updateDate");
                 int status = resultSet.getInt("status");
                 int type = resultSet.getInt("type");
                 Blob file = resultSet.getBlob("file");

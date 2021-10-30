@@ -93,7 +93,13 @@ public abstract class BaseDao<T> {
 
                         String columnLabel = metaData.getColumnLabel(i + 1);
 
-                        Field field = type.getDeclaredField(columnLabel);
+                        Field field = null;
+                        try {
+                            field = type.getDeclaredField(columnLabel);
+                        } catch (Exception e) {
+                            // 当前类不存在该字段，从父类获取
+                            field = type.getSuperclass().getDeclaredField(columnLabel);
+                        }
                         field.setAccessible(true);
                         field.set(t, object);
                     }

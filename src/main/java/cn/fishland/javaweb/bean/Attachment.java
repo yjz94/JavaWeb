@@ -23,7 +23,6 @@ public class Attachment extends BasBean {
     }
 
     public Attachment(String name, Integer status, Integer type, Blob file) {
-        this.createDate = new Date(System.currentTimeMillis());
         this.name = name;
         this.status = status;
         this.type = type;

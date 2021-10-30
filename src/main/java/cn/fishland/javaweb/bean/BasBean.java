@@ -1,6 +1,6 @@
 package cn.fishland.javaweb.bean;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * 所有实体类的基础类
@@ -12,8 +12,8 @@ import java.sql.Date;
 public abstract class BasBean {
 
     protected Integer id;
-    protected Date createDate;
-    protected Date updateDate;
+    protected Timestamp createDate;
+    protected Timestamp updateDate;
 
     public Integer getId() {
         return id;
@@ -23,19 +23,19 @@ public abstract class BasBean {
         this.id = id;
     }
 
-    public Date getCreateDate() {
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdateDate() {
+    public Timestamp getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
 }
