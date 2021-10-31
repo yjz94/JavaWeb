@@ -26,9 +26,10 @@
     <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
 <body>
-<form action="http://localhost:8080/JavaWeb/API/article/insert" method="post">
+<form action="http://localhost:8080/JavaWeb/admin/API/article/insert" method="post">
     <input type="hidden" name="articleId" id="articleId" value="${articleId}"/>
     <input type="hidden" name="content" id="content"/>
+    <input type="hidden" name="text" id="text"/>
 
     <div class="form-group">
         <label for="title">标题</label>
@@ -78,7 +79,7 @@
     editor.config.onchangeTimeout = 500; // 修改为 500ms
 
     // 配置图片上传地址
-    editor.config.uploadImgServer = 'API/attachment/insert/editor'
+    editor.config.uploadImgServer = 'admin/API/attachment/insert/editor'
 
     // 默认情况下，显示所有菜单
     editor.config.menus = [
@@ -135,16 +136,17 @@
     function setVal(newHtml) {
         // 使用函数名 filterXSS，用法一样
         $('#content').val(newHtml)
+        $('#text').val(editor.txt.text())
     }
 
     // 保存为草稿
     function draftSave() {
-        $('form').attr("action", "http://localhost:8080/JavaWeb/API/article/insert/draft");
+        $('form').attr("action", "http://localhost:8080/JavaWeb/admin/API/article/insert/draft");
     }
 
     // 保存文章
     function insertArticle() {
-        $('form').attr("action", "http://localhost:8080/JavaWeb/API/article/insert");
+        $('form').attr("action", "http://localhost:8080/JavaWeb/admin/API/article/insert");
     }
 
     function waitCon() {

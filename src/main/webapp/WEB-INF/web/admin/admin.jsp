@@ -17,7 +17,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- admin css -->
     <link href="css/admin.css" rel="stylesheet">
 
@@ -70,17 +69,19 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                              data-parent="#accordionExample">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a class="nav-link" href="#"> 查询文章 </a></li>
                                 <li class="list-group-item">
                                     <a class="nav-link" href="admin/article" target="adminPage">
-                                        新增文章
+                                        <span data-feather="file-plus"></span> 新增文章 <span data-feather="arrow-left"></span>
                                     </a>
                                 </li>
-                                <li class="list-group-item"><a class="nav-link" href="#"> 修改文章 </a></li>
-                                <li class="list-group-item"><a class="nav-link" href="#"> 删除文章 </a></li>
+                                <li class="list-group-item">
+                                    <a class="nav-link" href="#">
+                                        <span data-feather="file-text"></span> 文章管理
+                                    </a>
+                                </li>
                                 <li class="list-group-item">
                                     <a class="nav-link" href="admin/attachment" target="adminPage">
-                                        <span data-feather="arrow-right"></span> 素材管理
+                                        <span data-feather="file"></span> 素材管理
                                     </a>
                                 </li>
                             </ul>
@@ -98,8 +99,13 @@
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                              data-parent="#accordionExample">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a class="nav-link" href="#"> 新增用户 </a></li>
-                                <li class="list-group-item"><a class="nav-link" href="#"> 管理用户 </a></li>
+                                <li class="list-group-item">
+                                    <a class="nav-link" href="#">
+                                        <span data-feather="user-plus"></span> 新增用户
+                                    </a>
+                                </li>
+                                <li class="list-group-item"><a class="nav-link" href="#"><span
+                                        data-feather="users"></span> 用户管理 </a></li>
                             </ul>
                         </div>
                     </div>
@@ -117,10 +123,9 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<%--图标--%>
-<script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
-<script src="js/admin.js"></script>
 <script>
+    feather.replace()
+
     /*// document.domain = "caibaojian.com";
     function setIframeHeight(iframe) {
         if (iframe) {

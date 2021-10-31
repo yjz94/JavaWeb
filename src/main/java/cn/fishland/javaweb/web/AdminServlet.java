@@ -76,6 +76,10 @@ public class AdminServlet extends HttpServlet {
             req.setAttribute(StaticField.ARTICLE_TEMP_TAGS_FIELD,
                     RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TAGS_FIELD));
 
+            // 文章文本
+            req.setAttribute(StaticField.ARTICLE_TEMP_TEXT_FIELD,
+                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TEXT_FIELD));
+
         } else {
             // 文章articleId
             req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, FunctionUtils.getUUID());

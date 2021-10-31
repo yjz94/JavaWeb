@@ -19,8 +19,7 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- 代码高亮 highlight CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/base16/default-light.min.css"
-          rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/monokai.min.css" rel="stylesheet">
 
     <!-- 自定义样式 -->
     <style>

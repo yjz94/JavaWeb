@@ -42,10 +42,10 @@ public class ArticleServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String tail = FunctionUtils.getUriTail(req);
         switch (tail) {
-            case "/API/article/insert":
+            case "/admin/API/article/insert":
                 insert(req, resp);
                 break;
-            case "/API/article/insert/draft":
+            case "/admin/API/article/insert/draft":
                 draftSave(req, resp);
                 break;
             default:
@@ -76,6 +76,7 @@ public class ArticleServlet extends HttpServlet {
             String title = req.getParameter("title");
             String content = req.getParameter("content");
             String tags = req.getParameter("tags");
+            String text = req.getParameter("text");
 
             // 保存到redis中
             if (StringUtils.isNotBlank(articleId)) {
@@ -85,6 +86,7 @@ public class ArticleServlet extends HttpServlet {
                 hashMap.put(StaticField.ARTICLE_TEMP_TITLE_FIELD, title);
                 hashMap.put(StaticField.ARTICLE_TEMP_CONTENT_FIELD, content);
                 hashMap.put(StaticField.ARTICLE_TEMP_TAGS_FIELD, tags);
+                hashMap.put(StaticField.ARTICLE_TEMP_TEXT_FIELD, text);
                 RedisUtil.setHash(articleId, hashMap);
             }
 
@@ -108,11 +110,13 @@ public class ArticleServlet extends HttpServlet {
             String tags = req.getParameter("tags");
             String content = req.getParameter("content");
             String articleId = req.getParameter("articleId");
+            String text = req.getParameter("text");
 
             Article article = new Article();
             article.setArticleId(articleId);
             article.setStatus(1);
             article.setContent(content);
+            article.setText(text);
             article.setTitle(title);
             article.setTags(tags);
             article.setCreateDate(new Timestamp(System.currentTimeMillis()));

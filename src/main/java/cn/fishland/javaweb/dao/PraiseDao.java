@@ -2,6 +2,9 @@ package cn.fishland.javaweb.dao;
 
 import cn.fishland.javaweb.bean.Praise;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 文章交互数据数据库操作类
  *
@@ -19,4 +22,11 @@ public interface PraiseDao {
      */
     Praise queryByMaster(String master);
 
+    /**
+     * 获得Praise
+     *
+     * @param articleIds master
+     * @return praise集合
+     */
+    List<Praise> queryPraiseListByMaster(List<String> articleIds);
 }

@@ -20,7 +20,7 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
     public boolean insertAttachment(Attachment attachment) {
         Connection connection = JdbcUtils.getConnection();
 
-        String sql = "insert into attachment(`name`,`createDate`,`status`,`type`,`file`,`contentType`) values(?,?,?,?,?,?)";
+        String sql = "insert into attachment(`name`,`createDate`,`status`,`type`,`file`,`contentType`,`master`) values(?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -31,6 +31,7 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
             statement.setInt(4, attachment.getType());
             statement.setBlob(5, attachment.getFile());
             statement.setString(6, attachment.getContentType());
+            statement.setString(7, attachment.getMaster());
 
             statement.execute();
 

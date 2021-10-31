@@ -14,27 +14,18 @@
         <url-pattern>/code.jpg</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>attachment</servlet-name>
-        <servlet-class>cn.fishland.javaweb.web.AttachmentServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>attachment</servlet-name>
-        <url-pattern>/uploadImg</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>attachment</servlet-name>
-        <url-pattern>/getAttachment</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>attachment</servlet-name>
-        <url-pattern>/editUploadImg</url-pattern>
-    </servlet-mapping>
-
+    <!-- 服务器基本信息 -->
+    <session-config>
+        <session-timeout>20</session-timeout>
+    </session-config>
     <welcome-file-list>
         <welcome-file>/index</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>attachment</servlet-name>
+        <servlet-class>cn.fishland.javaweb.web.AttachmentServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>frontServlet</servlet-name>
         <servlet-class>cn.fishland.javaweb.web.FrontServlet</servlet-class>
@@ -91,11 +82,11 @@
     <!--ArticleServlet相关-->
     <servlet-mapping>
         <servlet-name>article</servlet-name>
-        <url-pattern>/API/article/insert</url-pattern>
+        <url-pattern>/admin/API/article/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>article</servlet-name>
-        <url-pattern>/API/article/insert/draft</url-pattern>
+        <url-pattern>/admin/API/article/insert/draft</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>article</servlet-name>
@@ -105,7 +96,11 @@
     <!--AttachmentServlet相关-->
     <servlet-mapping>
         <servlet-name>attachment</servlet-name>
-        <url-pattern>/API/attachment/insert/editor</url-pattern>
+        <url-pattern>/admin/API/attachment/insert/editor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>attachment</servlet-name>
+        <url-pattern>/API/attachment/show</url-pattern>
     </servlet-mapping>
 
     <!--UserServlet相关-->
@@ -119,6 +114,4 @@
         <filter-name>adminFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
-
-
 </web-app>

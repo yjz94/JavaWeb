@@ -3,8 +3,10 @@ package cn.fishland.javaweb.server.impl;
 import cn.fishland.javaweb.bean.Article;
 import cn.fishland.javaweb.dao.ArticleDao;
 import cn.fishland.javaweb.dao.AttachmentDao;
+import cn.fishland.javaweb.dao.PraiseDao;
 import cn.fishland.javaweb.dao.impl.ArticleDaoImpl;
 import cn.fishland.javaweb.dao.impl.AttachmentDaoImpl;
+import cn.fishland.javaweb.dao.impl.PraiseDaoImpl;
 import cn.fishland.javaweb.server.ArticleService;
 import cn.fishland.javaweb.util.FunctionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -20,13 +22,14 @@ import java.util.List;
  */
 public class ArticleServiceImpl implements ArticleService {
 
-    private static ArticleDao articleDao;
-
-    private static AttachmentDao attachmentDao;
+    private static final ArticleDao articleDao;
+    private static final PraiseDao praiseDao;
+    private static final AttachmentDao attachmentDao;
 
     static {
         articleDao = new ArticleDaoImpl();
         attachmentDao = new AttachmentDaoImpl();
+        praiseDao = new PraiseDaoImpl();
     }
 
     @Override
@@ -49,6 +52,12 @@ public class ArticleServiceImpl implements ArticleService {
             return articleDao.queryByArticleId(articleId);
         }
         return null;
+    }
+
+    @Override
+    public List<Article> articleList(int page, int num) {
+        // 获得所有文章
+        return articleDao.queryArticleByPage(page, num);
     }
 
 }

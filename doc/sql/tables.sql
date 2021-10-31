@@ -42,6 +42,7 @@ CREATE TABLE `article`
     `articleId`  varchar(50)  NOT NULL UNIQUE,
     `title`      VARCHAR(100) NOT NULL,
     `content`    TEXT         NOT NULL,
+    `text`       TEXT         NOT NULL,
     `createDate` TIMESTAMP    NOT NULL,
     `updateDate` TIMESTAMP,
     `tags`       VARCHAR(200) NOT NULL,
@@ -67,7 +68,9 @@ CREATE TABLE `praise`
   DEFAULT CHARSET = utf8;
 
 INSERT INTO praise(`createDate`, `thumbsUp`, `read`, `thumbsDown`, `message`, `master`, `status`)
-values ('2021-12-12 12:12:12', '12', '323', '43', '999', '5135173ade88467ea1de66edde0e6f2e', '1');
+values ('2021-12-12 12:12:12', '12', '323', '43', '999', '1651ef17a66640118e34d853fb6f183e', '1'),
+       ('2021-12-12 12:12:12', '12', '323', '43', '999', 'd7f0bbb38ff34e32925a92a07a1544c5', '1'),
+       ('2021-12-12 12:12:12', '12', '323', '43', '999', '4bf5610173df44089d8ff1fe69a220a7', '1');
 
 
 /*文章标签表*/

@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 前端展示控制类
@@ -72,6 +76,31 @@ public class FrontServlet extends HttpServlet {
     }
 
     private void index(HttpServletRequest req, HttpServletResponse resp) {
+
+        // 获得参数
+        int page = Integer.parseInt(req.getParameter("page"));
+        int num = Integer.parseInt(req.getParameter("num"));
+
+        // 获得文章列表
+        List<Article> articleList = articleService.articleList(page, num);
+
+        List<String> list = new ArrayList<>();
+        // articleId参数
+        for (Article article : articleList) {
+            list.add(article.getArticleId());
+        }
+
+        // 获得交互参数
+        List<Praise> praises = praiseService.praiseListByMaster(list);
+
+        Map<String, Praise> praiseMap = new HashMap<>(praises.size());
+        for (Praise praise : praises) {
+            praiseMap.put(praise.getMaster(), praise);
+        }
+
+        req.setAttribute("articleList", articleList);
+        req.setAttribute("praiseMap", praiseMap);
+
         try {
             req.getRequestDispatcher("/WEB-INF/web/front/index.jsp").forward(req, resp);
         } catch (Exception e) {

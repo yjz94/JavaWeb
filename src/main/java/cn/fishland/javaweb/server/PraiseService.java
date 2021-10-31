@@ -2,6 +2,8 @@ package cn.fishland.javaweb.server;
 
 import cn.fishland.javaweb.bean.Praise;
 
+import java.util.List;
+
 /**
  * 文章交互数据服务类
  *
@@ -11,7 +13,6 @@ import cn.fishland.javaweb.bean.Praise;
  */
 public interface PraiseService {
 
-
     /**
      * 根据文章articleId查询交互数据
      *
@@ -20,5 +21,12 @@ public interface PraiseService {
      */
     Praise getPraiseByMaster(String master);
 
+    /**
+     * 根据master查询内容
+     *
+     * @param masters master列表
+     * @return 交互数据集合
+     */
+    List<Praise> praiseListByMaster(List<String> masters);
 
 }

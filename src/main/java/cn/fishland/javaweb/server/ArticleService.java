@@ -2,6 +2,8 @@ package cn.fishland.javaweb.server;
 
 import cn.fishland.javaweb.bean.Article;
 
+import java.util.List;
+
 /**
  * 文章相关服务接口
  *
@@ -28,4 +30,12 @@ public interface ArticleService {
     Article getArticleByArticleId(String articleId);
 
 
+    /**
+     * 根据时间排序分页查询文章
+     *
+     * @param page 页数
+     * @param num  每页显示个数
+     * @return 文章列表
+     */
+    List<Article> articleList(int page, int num);
 }

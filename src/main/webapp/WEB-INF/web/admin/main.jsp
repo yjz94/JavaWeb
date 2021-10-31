@@ -6,14 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <title>Admin - Main - FishLand</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://127.0.0.1:8080/JavaWeb/">
+    <base href="http://localhost:8080/JavaWeb/">
     <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">

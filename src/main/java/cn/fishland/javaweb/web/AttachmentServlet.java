@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.sql.Blob;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -46,6 +45,22 @@ public class AttachmentServlet extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = FunctionUtils.getUriTail(req);
+
+        switch (action) {
+            case "/API/attachment/show":
+                show(req, resp);
+                break;
+            case "getAttachmentList":
+                queryAttachmentList(req, resp);
+                break;
+            default:
+        }
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         FunctionUtils.info("AttachmentServlet 开始处理请求");
 
@@ -58,7 +73,7 @@ public class AttachmentServlet extends HttpServlet {
                 case "uploadImg":
                     uploadImg(req, resp);
                     break;
-                case "/API/attachment/insert/editor":
+                case "/admin/API/attachment/insert/editor":
                     editorUpload(req, resp);
                     break;
                 default:
@@ -100,7 +115,7 @@ public class AttachmentServlet extends HttpServlet {
                 jsonObject.put("data", jsonArray);
                 JSONObject attachmentJsonObject = new JSONObject();
                 attachmentJsonObject.put("url",
-                        "http://127.0.0.1:8080/JavaWeb/getAttachment?action=getAttachment&attachmentName=" + attachment.getName());
+                        "http://localhost:8080/JavaWeb/API/attachment/show?attachmentName=" + attachment.getName());
                 attachmentJsonObject.put("alt", "图片文件");
                 attachmentJsonObject.put("href", "");
                 jsonArray.add(attachmentJsonObject);
@@ -168,28 +183,12 @@ public class AttachmentServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-
-        switch (action) {
-            case "getAttachment":
-                queryAttachment(req, resp);
-                break;
-            case "getAttachmentList":
-                queryAttachmentList(req, resp);
-                break;
-        }
-
-    }
 
     protected void queryAttachmentList(HttpServletRequest req, HttpServletResponse resp) {
         int page = Integer.parseInt(req.getParameter("page"));
-
-
     }
 
-    protected void queryAttachment(HttpServletRequest req, HttpServletResponse resp) {
+    protected void show(HttpServletRequest req, HttpServletResponse resp) {
         try {
             String name = req.getParameter("attachmentName");
             Attachment attachment = attachmentService.queryAttachment(name);

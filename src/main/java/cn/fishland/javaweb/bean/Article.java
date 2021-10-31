@@ -11,6 +11,7 @@ public class Article extends BasBean {
 
     private String articleId;
     private String content;
+    private String text;
     private String title;
     private String tags;
     private Integer status;
@@ -29,6 +30,14 @@ public class Article extends BasBean {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getTitle() {

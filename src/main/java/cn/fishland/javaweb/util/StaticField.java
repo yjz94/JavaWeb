@@ -17,6 +17,8 @@ public class StaticField {
     public static String ARTICLE_TEMP_CONTENT_FIELD = "content";
     /** 存放草稿文章tags的字段 */
     public static String ARTICLE_TEMP_TAGS_FIELD = "tags";
+    /** 存放草稿文章text的字段 */
+    public static String ARTICLE_TEMP_TEXT_FIELD = "text";
 
     /** 未上传文章上传附件的id（这里面存在删除和不用的） */
     public static String ARTICLE_TEMP_ATTACHMENT_ID_LIST = "articleAttachmentList";

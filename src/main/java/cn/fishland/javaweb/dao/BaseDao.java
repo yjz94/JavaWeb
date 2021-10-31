@@ -81,8 +81,10 @@ public abstract class BaseDao<T> {
             ResultSetMetaData metaData = statement.getMetaData();
             int columnCount = metaData.getColumnCount();
 
-            for (int i = 0; i < params.length; i++) {
-                statement.setObject(i + 1, params[i]);
+            if (params != null && params.length > 0) {
+                for (int i = 0; i < params.length; i++) {
+                    statement.setObject(i + 1, params[i]);
+                }
             }
 
             ResultSet resultSet = statement.executeQuery();

@@ -91,9 +91,10 @@ public class UserServlet extends HttpServlet {
 
             if (resultType == 0) {
                 req.getRequestDispatcher("/WEB-INF/web/admin/login.jsp").forward(req, resp);
+            } else {
+                resp.sendRedirect("/JavaWeb/admin");
             }
 
-            resp.sendRedirect("http://localhost:8080/JavaWeb/index");
         } catch (Exception e) {
             e.printStackTrace();
         }

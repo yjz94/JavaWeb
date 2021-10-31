@@ -2,6 +2,7 @@ package cn.fishland.javaweb.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ public class AdminFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resq = (HttpServletResponse) response;
 
         String uri = req.getRequestURI();
 
@@ -34,7 +36,7 @@ public class AdminFilter implements Filter {
             if (user != null) {
                 chain.doFilter(request, response);
             } else {
-                request.getRequestDispatcher("/WEB-INF/web/admin/login.jsp").forward(request, response);
+                resq.sendRedirect("/JavaWeb/admin/login");
             }
         }
     }
