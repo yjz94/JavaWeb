@@ -33,9 +33,9 @@ public class AdminFilter implements Filter {
             Object user = session.getAttribute("user");
             if (user != null) {
                 chain.doFilter(request, response);
+            } else {
+                request.getRequestDispatcher("/WEB-INF/web/admin/login.jsp").forward(request, response);
             }
-
-            request.getRequestDispatcher("/WEB-INF/web/admin/login.jsp").forward(request, response);
         }
     }
 

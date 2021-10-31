@@ -25,7 +25,7 @@ public class AdminServlet extends HttpServlet {
         String action = FunctionUtils.getUriTail(req);
 
         switch (action) {
-            case "/admin/index":
+            case "/admin":
                 admin(req, resp);
                 break;
             case "/admin/main":
