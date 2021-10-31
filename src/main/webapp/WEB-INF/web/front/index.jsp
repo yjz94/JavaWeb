@@ -111,29 +111,27 @@
 
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
-                        <c:forEach begin="1" end="10" var="i">
+
+                        <c:forEach var="article" items="${articleList}">
                             <div class="col-lg-6">
                                 <!-- Blog post-->
                                 <div class="card mb-3">
                                     <a href="#!">
-                                        <img class="card-img-top" src="imgs/default.jpeg" alt="..."/>
+                                        <img class="card-img-top" src="${coverMap[article.articleId]}" style="height: 200px;"/>
                                     </a>
                                     <div class="card-body">
-                                        <div class="small text-muted">January 1, 2021</div>
-                                        <h2 class="card-title h4">Post Title</h2>
-                                        <p class="card-text p-show-line-3">Lorem ipsum dolor sit amet, consectetur
-                                            adipisicing elit.
-                                            Reiciendis
-                                            aliquid atque, nulla.${i}</p>
-                                            <%--<a class="btn btn-primary" href="#!">Read more →</a>--%>
+                                        <div class="small text-muted">${article.createDate}</div>
+                                        <h2 class="card-title h4">${article.title}</h2>
+                                        <p class="card-text p-show-line-3">${article.text}</p>
                                         <a href="#" class="badge badge-light" style="margin: 0 5px;">
-                                            <span data-feather="thumbs-up" style="color: #1E90FF;"></span> 134
+                                            <span data-feather="thumbs-up"
+                                                  style="color: #1E90FF;"></span>${praiseMap[article.articleId].thumbsUp}
                                         </a>
                                         <a href="#" class="badge badge-light" style="margin: 0 5px;">
-                                            <span data-feather="thumbs-down"></span> 134
+                                            <span data-feather="thumbs-down"></span> ${praiseMap[article.articleId].thumbsDown}
                                         </a>
                                         <a href="#" class="badge badge-light" style="margin: 0 5px;">
-                                            <span data-feather="message-square"></span> 7890
+                                            <span data-feather="message-square"></span> ${praiseMap[article.articleId].message}
                                         </a>
                                     </div>
                                 </div>

@@ -7,6 +7,7 @@ import cn.fishland.javaweb.server.PraiseService;
 import cn.fishland.javaweb.server.impl.ArticleServiceImpl;
 import cn.fishland.javaweb.server.impl.PraiseServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -78,16 +79,35 @@ public class FrontServlet extends HttpServlet {
     private void index(HttpServletRequest req, HttpServletResponse resp) {
 
         // 获得参数
-        int page = Integer.parseInt(req.getParameter("page"));
-        int num = Integer.parseInt(req.getParameter("num"));
+        String pageStr = req.getParameter("page");
+        int page = 1;
+        if (StringUtils.isNotBlank(pageStr)) {
+            page = Integer.parseInt(pageStr);
+        }
+
+        String numStr = req.getParameter("num");
+        int num = 10;
+        if (StringUtils.isNotBlank(numStr)) {
+            num = Integer.parseInt(numStr);
+        }
 
         // 获得文章列表
         List<Article> articleList = articleService.articleList(page, num);
 
+        Map<String, String> coverMap = new HashMap<>(articleList.size());
         List<String> list = new ArrayList<>();
         // articleId参数
         for (Article article : articleList) {
             list.add(article.getArticleId());
+
+            // 获得文章的封面
+            String attachmentName = FunctionUtils.matchFirstString(article.getContent(), "[\\?|\\&]attachmentName\\=(.{32})");
+            if (StringUtils.isBlank(attachmentName)) {
+                attachmentName = "http://localhost:8080/JavaWeb/imgs/default.jpeg";
+            } else {
+                attachmentName = "http://localhost:8080/JavaWeb/API/attachment/show?attachmentName=" + attachmentName;
+            }
+            coverMap.put(article.getArticleId(), attachmentName);
         }
 
         // 获得交互参数
@@ -100,6 +120,7 @@ public class FrontServlet extends HttpServlet {
 
         req.setAttribute("articleList", articleList);
         req.setAttribute("praiseMap", praiseMap);
+        req.setAttribute("coverMap", coverMap);
 
         try {
             req.getRequestDispatcher("/WEB-INF/web/front/index.jsp").forward(req, resp);
