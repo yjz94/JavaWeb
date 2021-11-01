@@ -3,7 +3,6 @@ package cn.fishland.javaweb.dao;
 import cn.fishland.javaweb.bean.Praise;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 文章交互数据数据库操作类
@@ -29,4 +28,11 @@ public interface PraiseDao {
      * @return praise集合
      */
     List<Praise> queryPraiseListByMaster(List<String> articleIds);
+
+    /**
+     * 获得排名第一的交互数据
+     *
+     * @return 交互数据对象
+     */
+    Praise topPraise();
 }

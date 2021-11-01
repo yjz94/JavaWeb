@@ -62,4 +62,11 @@ public interface ArticleDao {
      */
     List<Article> queryArticleByPage(int page, int num);
 
+    /**
+     * 统计文章数量
+     *
+     * @return 文章总数
+     */
+    int countArticle();
+
 }

@@ -1,9 +1,13 @@
 package cn.fishland.javaweb.dao.impl;
 
 import cn.fishland.javaweb.bean.Article;
+import cn.fishland.javaweb.bean.Praise;
 import cn.fishland.javaweb.dao.ArticleDao;
 import cn.fishland.javaweb.dao.BaseDao;
+import cn.fishland.javaweb.dao.PraiseDao;
+import cn.fishland.javaweb.util.JdbcUtils;
 
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -14,6 +18,12 @@ import java.util.List;
  * @date 2021/10/23 10:53 上午
  */
 public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
+
+    private static final PraiseDao praiseDao;
+
+    static {
+        praiseDao = new PraiseDaoImpl();
+    }
 
     @Override
     public int save(Article article) {
@@ -51,4 +61,21 @@ public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
         String sql = "SELECT * FROM article WHERE `status` = 1 GROUP BY id DESC LIMIT " + offset + "," + num;
         return queryList(sql, null);
     }
+
+    @Override
+    public int countArticle() {
+        try {
+            String sql = "select count(1) from article where status = 1";
+            Connection connection = JdbcUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 }

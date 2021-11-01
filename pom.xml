@@ -124,6 +124,7 @@
     </dependencies>
 
     <build>
+        <finalName>JavaWeb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

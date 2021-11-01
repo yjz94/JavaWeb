@@ -3,6 +3,7 @@ package cn.fishland.javaweb.server;
 import cn.fishland.javaweb.bean.Article;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 文章相关服务接口
@@ -38,4 +39,12 @@ public interface ArticleService {
      * @return 文章列表
      */
     List<Article> articleList(int page, int num);
+
+    /**
+     * 文章一些统计数据
+     *
+     * @return 双列集合
+     */
+    Map<String, Integer> articleCount();
+
 }

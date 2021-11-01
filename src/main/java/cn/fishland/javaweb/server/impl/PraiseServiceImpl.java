@@ -32,4 +32,9 @@ public class PraiseServiceImpl implements PraiseService {
         return praiseDao.queryPraiseListByMaster(masters);
     }
 
+    @Override
+    public Praise topArticle() {
+        return praiseDao.topPraise();
+    }
+
 }

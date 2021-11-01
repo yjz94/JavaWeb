@@ -29,4 +29,10 @@ public interface PraiseService {
      */
     List<Praise> praiseListByMaster(List<String> masters);
 
+    /**
+     * top第一交互数据
+     * @return
+     */
+    Praise topArticle();
+
 }

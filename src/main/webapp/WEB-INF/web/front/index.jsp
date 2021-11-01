@@ -7,14 +7,23 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!doctype html>
 <html lang="zh">
 <head>
+    <!--
+          /$$$$$$  /$$           /$$       /$$                           /$$
+         /$$__  $$|__/          | $$      | $$                          | $$
+        | $$  \__/ /$$  /$$$$$$$| $$$$$$$ | $$  /$$$$$$  /$$$$$$$   /$$$$$$$      /$$$$$$$ /$$$$$$$
+        | $$$$    | $$ /$$_____/| $$__  $$| $$ |____  $$| $$__  $$ /$$__  $$     /$$_____/| $$__  $$
+        | $$_/    | $$|  $$$$$$ | $$  \ $$| $$  /$$$$$$$| $$  \ $$| $$  | $$    | $$      | $$  \ $$
+        | $$      | $$ \____  $$| $$  | $$| $$ /$$__  $$| $$  | $$| $$  | $$    | $$      | $$  | $$
+        | $$      | $$ /$$$$$$$/| $$  | $$| $$|  $$$$$$$| $$  | $$|  $$$$$$$ /$$|  $$$$$$$| $$  | $$
+        |__/      |__/|_______/ |__/  |__/|__/ \_______/|__/  |__/ \_______/|__/ \_______/|__/  |__/
+    -->
     <title>FishLand</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://127.0.0.1:8080/JavaWeb/">
+    <base href="http://localhost:8080/JavaWeb/">
     <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
 
     <!-- Bootstrap CSS -->
@@ -85,26 +94,21 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="#!">
-                            <img class="card-img-top" src="imgs/default.jpeg" alt="..."/>
+                        <a href="http://localhost:8080/JavaWeb/API/article/get?articleId=${topArticle.articleId}">
+                            <img class="card-img-top" src="${topArticleCover}" alt="..."/>
                         </a>
                         <div class="card-body">
-                            <div class="small text-muted">January 1, 2021</div>
-                            <h2 class="card-title">Featured Post Title</h2>
-                            <p class="card-text p-show-line-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Reiciendis
-                                aliquid
-                                atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero
-                                voluptate voluptatibus possimus, veniam magni quis!</p>
-                            <%--<a class="btn btn-primary" href="#!">Read more →</a>--%>
+                            <div class="small text-muted">${topArticle.createDate}</div>
+                            <h2 class="card-title">${topArticle.title}</h2>
+                            <p class="card-text p-show-line-3">${topArticle.text}</p>
                             <a href="#" class="badge badge-light" style="margin: 0 5px;">
-                                <span data-feather="thumbs-up" style="color: #1E90FF;"></span> 134
+                                <span data-feather="thumbs-up" style="color: #1E90FF;"></span> ${topPraise.thumbsUp}
                             </a>
                             <a href="#" class="badge badge-light" style="margin: 0 5px;">
-                                <span data-feather="thumbs-down"></span> 134
+                                <span data-feather="thumbs-down"></span> ${topPraise.thumbsDown}
                             </a>
                             <a href="#" class="badge badge-light" style="margin: 0 5px;">
-                                <span data-feather="message-square"></span> 7890
+                                <span data-feather="message-square"></span> ${topPraise.message}
                             </a>
                         </div>
                     </div>
@@ -116,8 +120,9 @@
                             <div class="col-lg-6">
                                 <!-- Blog post-->
                                 <div class="card mb-3">
-                                    <a href="#!">
-                                        <img class="card-img-top" src="${coverMap[article.articleId]}" style="height: 200px;"/>
+                                    <a href="http://localhost:8080/JavaWeb/API/article/get?articleId=${article.articleId}">
+                                        <img class="card-img-top" src="${coverMap[article.articleId]}"
+                                             style="height: 200px;"/>
                                     </a>
                                     <div class="card-body">
                                         <div class="small text-muted">${article.createDate}</div>
@@ -143,15 +148,17 @@
                     <nav aria-label="Pagination">
                         <hr class="my-0"/>
                         <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
-                                                              aria-disabled="true">Newer</a>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
                             </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#!">1</a>
+                            </li>
                             <li class="page-item"><a class="page-link" href="#!">2</a></li>
                             <li class="page-item"><a class="page-link" href="#!">3</a></li>
                             <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
                             <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">下一页</a></li>
                         </ul>
                     </nav>
                 </div>

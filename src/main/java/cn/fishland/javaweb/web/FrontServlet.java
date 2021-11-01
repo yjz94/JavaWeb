@@ -84,12 +84,7 @@ public class FrontServlet extends HttpServlet {
         if (StringUtils.isNotBlank(pageStr)) {
             page = Integer.parseInt(pageStr);
         }
-
-        String numStr = req.getParameter("num");
         int num = 10;
-        if (StringUtils.isNotBlank(numStr)) {
-            num = Integer.parseInt(numStr);
-        }
 
         // 获得文章列表
         List<Article> articleList = articleService.articleList(page, num);
@@ -118,9 +113,29 @@ public class FrontServlet extends HttpServlet {
             praiseMap.put(praise.getMaster(), praise);
         }
 
+        // 获得top文章
+        Praise topPraise = praiseService.topArticle();
+        Article topArticle = articleService.getArticleByArticleId(topPraise.getMaster());
+
+        // 获得页数
+        Map<String, Integer> map = articleService.articleCount();
+
         req.setAttribute("articleList", articleList);
         req.setAttribute("praiseMap", praiseMap);
         req.setAttribute("coverMap", coverMap);
+        req.setAttribute("topPraise", topPraise);
+        req.setAttribute("topArticle", topArticle);
+
+        String topArticleCover;
+        String attachmentName = FunctionUtils.matchFirstString(topArticle.getContent(), "[\\?|\\&]attachmentName\\=(.{32})");
+        if (StringUtils.isBlank(attachmentName)) {
+            topArticleCover = "http://localhost:8080/JavaWeb/imgs/default.jpeg";
+        } else {
+            topArticleCover = "http://localhost:8080/JavaWeb/API/attachment/show?attachmentName=" + attachmentName;
+        }
+        req.setAttribute("topArticleCover", topArticleCover);
+
+        req.setAttribute("map", map);
 
         try {
             req.getRequestDispatcher("/WEB-INF/web/front/index.jsp").forward(req, resp);

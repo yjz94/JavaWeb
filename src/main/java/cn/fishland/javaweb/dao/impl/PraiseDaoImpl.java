@@ -3,7 +3,11 @@ package cn.fishland.javaweb.dao.impl;
 import cn.fishland.javaweb.bean.Praise;
 import cn.fishland.javaweb.dao.BaseDao;
 import cn.fishland.javaweb.dao.PraiseDao;
+import cn.fishland.javaweb.util.JdbcUtils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -33,6 +37,12 @@ public class PraiseDaoImpl extends BaseDao<Praise> implements PraiseDao {
         String sql = stringBuffer.substring(0, stringBuffer.length() - 1);
         sql = sql + ")";
         return queryList(sql, null);
+    }
+
+    @Override
+    public Praise topPraise() {
+        String sql = "select * from praise where status = 1 group by thumbsUp,message desc";
+        return query(sql, null);
     }
 
 }
