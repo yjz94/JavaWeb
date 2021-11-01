@@ -4,6 +4,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -124,6 +126,27 @@ public class RedisUtil {
         } finally {
             close(jedis);
         }
+    }
+
+    public static List<String> listAll(String key) {
+        Jedis jedis = null;
+        List<String> list = null;
+        try {
+            jedis = getJedis();
+            Long len = listLen(key);
+            list = null;
+            if (len > 0) {
+                list = new ArrayList<>();
+                for (int i = 0; i < len; i++) {
+                    list.add(jedis.lindex(key, i));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jedis.close();
+        }
+        return list;
     }
 
     public static String getHash(String key, String filed) {

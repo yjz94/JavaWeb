@@ -1,6 +1,7 @@
 package cn.fishland.javaweb.server.impl;
 
 import cn.fishland.javaweb.bean.Article;
+import cn.fishland.javaweb.bean.Praise;
 import cn.fishland.javaweb.dao.ArticleDao;
 import cn.fishland.javaweb.dao.AttachmentDao;
 import cn.fishland.javaweb.dao.PraiseDao;
@@ -9,8 +10,11 @@ import cn.fishland.javaweb.dao.impl.AttachmentDaoImpl;
 import cn.fishland.javaweb.dao.impl.PraiseDaoImpl;
 import cn.fishland.javaweb.server.ArticleService;
 import cn.fishland.javaweb.util.FunctionUtils;
+import cn.fishland.javaweb.util.RedisUtil;
+import cn.fishland.javaweb.util.StaticField;
 import org.apache.commons.lang3.StringUtils;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +41,25 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean save(Article article) {
         // 保存文章内容
-        int save = articleDao.save(article);
-        if (save == 1) {
-            // 删除未使用附件
-            List<String> attachmentNames =
-                    FunctionUtils.matchAllString(article.getContent(), "\\&attachmentName\\=(.{32})");
-            attachmentDao.deleteAttachment(attachmentNames.toArray(new String[0]));
-            return true;
-        }
-        return false;
+        articleDao.save(article);
+
+        // 删除未使用附件
+        List<String> attachmentNames =
+                FunctionUtils.matchAllString(article.getContent(), "[\\&|\\?]attachmentName\\=(.{32})");
+        List<String> strings = RedisUtil.listAll(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
+        strings.removeAll(attachmentNames);
+        attachmentDao.deleteAttachment(strings.toArray(new String[0]));
+
+        // 生成交互数据
+        Praise praise = new Praise();
+        praise.setMaster(article.getArticleId());
+        praise.setStatus(1);
+        praise.setCreateDate(new Timestamp(System.currentTimeMillis()));
+        praiseDao.savePraise(praise);
+
+        // 删除附件redis
+        RedisUtil.del(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
+        return true;
     }
 
     @Override

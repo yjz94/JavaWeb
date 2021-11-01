@@ -35,4 +35,13 @@ public interface PraiseDao {
      * @return 交互数据对象
      */
     Praise topPraise();
+
+    /**
+     * 保存交互数据
+     *
+     * @param praise 交互数据对象
+     * @return true表示保存成功
+     */
+    boolean savePraise(Praise praise);
+
 }

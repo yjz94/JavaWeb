@@ -128,7 +128,7 @@ public class ArticleServlet extends HttpServlet {
             // 删除redis中草稿
             RedisUtil.del(articleId);
             RedisUtil.del(StaticField.ARTICLE_TEMP_UUID_KEY);
-            RedisUtil.del(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
+
 
             article(req, resp);
         } catch (Exception e) {
