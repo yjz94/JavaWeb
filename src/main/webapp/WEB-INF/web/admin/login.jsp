@@ -18,7 +18,7 @@
     <!-- Site icon -->
     <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
     <!-- Custom styles -->
-    <link href="css/signin.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 
     <title>Login - FishLand</title>
 </head>
