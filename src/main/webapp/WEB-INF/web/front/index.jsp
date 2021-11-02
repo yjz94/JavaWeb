@@ -23,7 +23,7 @@
     <title>FishLand</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://localhost:8080/JavaWeb/">
+    <base href="${baseUrl}">
     <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
 
     <!-- Bootstrap CSS -->
@@ -36,7 +36,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index">
                 <img src="imgs/fishland.svg" width="30" height="30" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -47,26 +47,27 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">博客</a>
+                        <a class="nav-link" href="index">博客</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">头条</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">头条</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">游戏</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="nav-link dropdown-toggle" href="#" <%--id="dropdown01" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"--%> data-toggle="modal"
+                           data-target="#staticBackdrop">游戏</a>
+                        <%--<div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="#">戴森球</a>
                             <a class="dropdown-item" href="#">英雄联盟</a>
                             <a class="dropdown-item" href="#">云顶之弈</a>
-                        </div>
+                        </div>--%>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">分享</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">分享</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">关于</a>
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">关于</a>
                     </li>
                 </ul>
             </div>
@@ -79,10 +80,10 @@
     <section class="jumbotron text-center abstract-index">
         <div class="container">
             <h1 style="color: #ffffff;">个人分享网站</h1>
-            <p class="lead text-muted">这是一个分享网站，主要目的是练习JavaWeb，同时也分享一些自己认为比较好的技术、技巧和常识。</p>
+            <p class="lead text-muted">这是一个分享网站，主要目的是练习JavaWeb，同时也分享一些自己认为比较好的技术、技巧和资源。</p>
             <p>
-                <a href="#" class="btn btn-primary my-2">关注</a>
-                <a href="#" class="btn btn-secondary my-2">留言</a>
+                <a href="#" class="btn btn-primary my-2" data-toggle="modal" data-target="#staticBackdrop">关注</a>
+                <a href="#" class="btn btn-secondary my-2" data-toggle="modal" data-target="#staticBackdrop">留言</a>
             </p>
         </div>
     </section>
@@ -265,6 +266,28 @@
         </p>
     </div>
 </footer>
+
+<!-- message model -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">温馨提示</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                功能还在开发中，敬请期待！
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>

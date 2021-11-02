@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!--基础参数-->
+    <context-param>
+        <param-name>baseUrl</param-name>
+        <param-value>http://81.68.191.103:8080/JavaWeb/</param-value>
+    </context-param>
+
     <!--（谷歌验证码）第三方依赖-->
     <servlet>
         <servlet-name>kaptchaServlet</servlet-name>

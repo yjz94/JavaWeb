@@ -1,5 +1,5 @@
 USE
-    test;
+    javaweb;
 /*用户表*/
 CREATE TABLE `user`
 (
@@ -16,8 +16,7 @@ CREATE TABLE `user`
   DEFAULT CHARSET = utf8;
 
 INSERT INTO user (`name`, `email`, `password`, `status`)
-VALUES ('admin', 'fishland@gmail.com', 'admin123', 1),
-       ('小鱼', 'xiaoyu@gmail.com', 'admin123', 1);
+VALUES ('admin', 'admin@gmail.com', 'admin123', 1);
 
 /*附件表*/
 CREATE TABLE `attachment`
@@ -67,12 +66,6 @@ CREATE TABLE `praise`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
-INSERT INTO praise(`createDate`, `thumbsUp`, `read`, `thumbsDown`, `message`, `master`, `status`)
-values ('2021-12-12 12:12:12', '12', '323', '43', '999', '1651ef17a66640118e34d853fb6f183e', '1'),
-       ('2021-12-12 12:12:12', '12', '323', '43', '999', 'd7f0bbb38ff34e32925a92a07a1544c5', '1'),
-       ('2021-12-12 12:12:12', '12', '323', '43', '999', '4bf5610173df44089d8ff1fe69a220a7', '1');
-
-
 /*文章标签表*/
 CREATE TABLE `tag`
 (
@@ -85,8 +78,3 @@ CREATE TABLE `tag`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-
-INSERT INTO tag(`createDate`, `name`, `master`, `status`)
-values ('2021-12-12 12:12:12', 'Java', '5135173ade88467ea1de66edde0e6f2e', '1'),
-       ('2021-12-12 12:12:12', 'CSS', '5135173ade88467ea1de66edde0e6f2e', '1'),
-       ('2021-12-12 12:12:12', 'Html', '5135173ade88467ea1de66edde0e6f2e', '1');
