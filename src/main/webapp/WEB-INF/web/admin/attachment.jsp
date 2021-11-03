@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -36,89 +37,17 @@
 <div style="width: 100%;background-color: #1b1e21;height: 1px; margin: 10px 0;"></div>
 <div>
     <div class="row row-cols-4">
-
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
+        <c:forEach begin="0" end="10" var="i">
+            <div class="col">
+                <div class="card" style="width: 18rem; margin: 10px;">
+                    <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">attment${i}</h5>
+                        <p class="card-text">这是附件的简......</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="width: 18rem; margin: 10px;">
-                <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">attment1</h5>
-                    <p class="card-text">这是附件的简......</p>
-                </div>
-            </div>
-        </div>
-
+        </c:forEach>
     </div>
 </div>
 

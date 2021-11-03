@@ -114,8 +114,8 @@ public class AttachmentServlet extends HttpServlet {
                 JSONArray jsonArray = new JSONArray();
                 jsonObject.put("data", jsonArray);
                 JSONObject attachmentJsonObject = new JSONObject();
-                attachmentJsonObject.put("url",
-                        "http://localhost:8080/JavaWeb/API/attachment/show?attachmentName=" + attachment.getName());
+                attachmentJsonObject.put("url", getServletConfig().getInitParameter("baseUrl")
+                        + "API/attachment/show?attachmentName=" + attachment.getName());
                 attachmentJsonObject.put("alt", "图片文件");
                 attachmentJsonObject.put("href", "");
                 jsonArray.add(attachmentJsonObject);

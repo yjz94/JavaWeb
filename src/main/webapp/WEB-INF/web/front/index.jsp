@@ -17,49 +17,8 @@
     <link href="css/front.css" rel="stylesheet">
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index">
-                <img src="imgs/fishland.svg" width="30" height="30" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index">博客</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">头条</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" <%--id="dropdown01" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"--%> data-toggle="modal"
-                           data-target="#staticBackdrop">游戏</a>
-                        <%--<div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="#">戴森球</a>
-                            <a class="dropdown-item" href="#">英雄联盟</a>
-                            <a class="dropdown-item" href="#">云顶之弈</a>
-                        </div>--%>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">分享</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">关于</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-
+<jsp:include page="../common/indexHead.jsp"/>
 <main role="main">
     <section class="jumbotron text-center abstract-index">
         <div class="container">
@@ -79,7 +38,7 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="API/article/get?articleId=${topArticle.articleId}">
+                        <a target="_blank" href="article?articleId=${topArticle.articleId}">
                             <img class="card-img-top" src="${topArticleCover}" alt="..."/>
                         </a>
                         <div class="card-body">
@@ -100,12 +59,11 @@
 
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
-
                         <c:forEach var="article" items="${articleList}">
                             <div class="col-lg-6">
                                 <!-- Blog post-->
                                 <div class="card mb-3">
-                                    <a href="API/article/get?articleId=${article.articleId}">
+                                    <a target="_blank" href="article?articleId=${article.articleId}">
                                         <img class="card-img-top" src="${coverMap[article.articleId]}"
                                              style="height: 200px;"/>
                                     </a>
@@ -237,41 +195,7 @@
     </div>
 
 </main>
-<!-- Footer-->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
-        <p class="float-right">
-            <a href="#">回到顶部</a>
-        </p>
-        <p>
-            <a href="/">FishLand</a>
-            <a href="#">(京ICP备********号 | 京公网安备*******号)</a>
-        </p>
-    </div>
-</footer>
-
-<!-- message model -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">温馨提示</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                功能还在开发中，敬请期待！
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<jsp:include page="../common/indexFooter.jsp"/>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>

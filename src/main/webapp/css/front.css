@@ -77,3 +77,28 @@ footer {
 footer p {
     margin-bottom: .25rem;
 }
+
+/*Article.jsp*/
+.article-jumbotron {
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .article-jumbotron {
+        padding-bottom: 4rem;
+    }
+}
+
+.article-jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.article-jumbotron h1 {
+    font-weight: 300;
+}
+
+.article-jumbotron .container {
+    max-width: 40rem;
+}

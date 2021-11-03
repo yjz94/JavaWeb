@@ -27,7 +27,12 @@
     <welcome-file-list>
         <welcome-file>/index</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/web/404.jsp</location>
+    </error-page>
 
+    <!-- 相应servlet -->
     <servlet>
         <servlet-name>attachment</servlet-name>
         <servlet-class>cn.fishland.javaweb.web.AttachmentServlet</servlet-class>
@@ -61,6 +66,10 @@
     <servlet-mapping>
         <servlet-name>frontServlet</servlet-name>
         <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>frontServlet</servlet-name>
+        <url-pattern>/404</url-pattern>
     </servlet-mapping>
 
     <!--后台主页面-->

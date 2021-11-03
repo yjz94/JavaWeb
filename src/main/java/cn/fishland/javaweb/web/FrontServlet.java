@@ -47,7 +47,18 @@ public class FrontServlet extends HttpServlet {
             case "/article":
                 article(req, resp);
                 break;
+            case "/404":
+                page404(req, resp);
+                break;
             default:
+        }
+    }
+
+    private void page404(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            req.getRequestDispatcher("/WEB-INF/web/404.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
