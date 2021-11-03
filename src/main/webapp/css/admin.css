@@ -8,10 +8,7 @@ body {
   vertical-align: text-bottom;
 }
 
-/*
- * Sidebar
- */
-
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -115,4 +112,9 @@ body {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
+}
+
+iframe {
+  border: 0;
+  background-color: transparent;
 }

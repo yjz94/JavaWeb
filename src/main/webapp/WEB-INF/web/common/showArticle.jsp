@@ -10,12 +10,7 @@
 <html lang="zh">
 <head>
     <title>ShowArticle - FishLand</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://127.0.0.1:8080/JavaWeb/">
-    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <%@ include file="../common/baseLib.jsp" %>
 </head>
 <body>
 <div style="padding: 10px;">

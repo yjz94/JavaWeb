@@ -7,7 +7,7 @@
     <!--基础参数-->
     <context-param>
         <param-name>baseUrl</param-name>
-        <param-value>http://81.68.191.103:8080/JavaWeb/</param-value>
+        <param-value>http://127.0.0.1:8080/JavaWeb/</param-value>
     </context-param>
 
     <!--（谷歌验证码）第三方依赖-->

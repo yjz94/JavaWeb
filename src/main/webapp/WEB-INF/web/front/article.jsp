@@ -9,90 +9,13 @@
 <!doctype html>
 <html lang="zh">
 <head>
-    <!--
-          /$$$$$$  /$$           /$$       /$$                           /$$
-         /$$__  $$|__/          | $$      | $$                          | $$
-        | $$  \__/ /$$  /$$$$$$$| $$$$$$$ | $$  /$$$$$$  /$$$$$$$   /$$$$$$$      /$$$$$$$ /$$$$$$$
-        | $$$$    | $$ /$$_____/| $$__  $$| $$ |____  $$| $$__  $$ /$$__  $$     /$$_____/| $$__  $$
-        | $$_/    | $$|  $$$$$$ | $$  \ $$| $$  /$$$$$$$| $$  \ $$| $$  | $$    | $$      | $$  \ $$
-        | $$      | $$ \____  $$| $$  | $$| $$ /$$__  $$| $$  | $$| $$  | $$    | $$      | $$  | $$
-        | $$      | $$ /$$$$$$$/| $$  | $$| $$|  $$$$$$$| $$  | $$|  $$$$$$$ /$$|  $$$$$$$| $$  | $$
-        |__/      |__/|_______/ |__/  |__/|__/ \_______/|__/  |__/ \_______/|__/ \_______/|__/  |__/
-    -->
     <title>Article - FishLand</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://127.0.0.1:8080/JavaWeb/">
-    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
+    <%@ include file="../common/baseLib.jsp" %>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- 代码高亮 highlight CSS -->
+    <!-- 代码高亮样式 highlight CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/monokai.min.css" rel="stylesheet">
-
     <!-- 自定义样式 -->
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        /*控制图标大小*/
-        .feather {
-            width: 20px;
-            height: 20px;
-            /*stroke: #1E90FF;*/
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .article-jumbotron {
-            padding-bottom: 3rem;
-            margin-bottom: 0;
-            background-color: #fff;
-        }
-
-        @media (min-width: 768px) {
-            .article-jumbotron {
-                padding-bottom: 4rem;
-            }
-        }
-
-        .article-jumbotron p:last-child {
-            margin-bottom: 0;
-        }
-
-        .article-jumbotron h1 {
-            font-weight: 300;
-        }
-
-        .article-jumbotron .container {
-            max-width: 40rem;
-        }
-
-        footer {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-        }
-
-        footer p {
-            margin-bottom: .25rem;
-        }
-
-    </style>
+    <link href="css/frontArticle.css" rel="stylesheet">
 </head>
 <body>
 <header>

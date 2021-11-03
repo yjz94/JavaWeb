@@ -10,24 +10,8 @@
 <!doctype html>
 <html lang="zh">
 <head>
-    <!--
-          /$$$$$$  /$$           /$$       /$$                           /$$
-         /$$__  $$|__/          | $$      | $$                          | $$
-        | $$  \__/ /$$  /$$$$$$$| $$$$$$$ | $$  /$$$$$$  /$$$$$$$   /$$$$$$$      /$$$$$$$ /$$$$$$$
-        | $$$$    | $$ /$$_____/| $$__  $$| $$ |____  $$| $$__  $$ /$$__  $$     /$$_____/| $$__  $$
-        | $$_/    | $$|  $$$$$$ | $$  \ $$| $$  /$$$$$$$| $$  \ $$| $$  | $$    | $$      | $$  \ $$
-        | $$      | $$ \____  $$| $$  | $$| $$ /$$__  $$| $$  | $$| $$  | $$    | $$      | $$  | $$
-        | $$      | $$ /$$$$$$$/| $$  | $$| $$|  $$$$$$$| $$  | $$|  $$$$$$$ /$$|  $$$$$$$| $$  | $$
-        |__/      |__/|_______/ |__/  |__/|__/ \_______/|__/  |__/ \_______/|__/ \_______/|__/  |__/
-    -->
     <title>FishLand</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="${baseUrl}">
-    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <%@ include file="../common/baseLib.jsp" %>
 
     <!-- 前段自定义样式 -->
     <link href="css/front.css" rel="stylesheet">
@@ -95,7 +79,7 @@
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="http://localhost:8080/JavaWeb/API/article/get?articleId=${topArticle.articleId}">
+                        <a href="API/article/get?articleId=${topArticle.articleId}">
                             <img class="card-img-top" src="${topArticleCover}" alt="..."/>
                         </a>
                         <div class="card-body">
@@ -121,7 +105,7 @@
                             <div class="col-lg-6">
                                 <!-- Blog post-->
                                 <div class="card mb-3">
-                                    <a href="http://localhost:8080/JavaWeb/API/article/get?articleId=${article.articleId}">
+                                    <a href="API/article/get?articleId=${article.articleId}">
                                         <img class="card-img-top" src="${coverMap[article.articleId]}"
                                              style="height: 200px;"/>
                                     </a>

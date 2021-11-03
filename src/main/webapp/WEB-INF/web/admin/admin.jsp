@@ -10,22 +10,10 @@
 <html lang="zh">
 <head>
     <title>Admin - FishLand</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://localhost:8080/JavaWeb/">
-    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
+    <%@ include file="../common/baseLib.jsp" %>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- admin css -->
     <link href="css/admin.css" rel="stylesheet">
-
-    <style>
-        iframe {
-            border: 0;
-            background-color: transparent;
-        }
-    </style>
 </head>
 <body>
 
@@ -71,7 +59,8 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <a class="nav-link" href="admin/article" target="adminPage">
-                                        <span data-feather="file-plus"></span> 新增文章 <span data-feather="arrow-left"></span>
+                                        <span data-feather="file-plus"></span> 新增文章 <span
+                                            data-feather="arrow-left"></span>
                                     </a>
                                 </li>
                                 <li class="list-group-item">

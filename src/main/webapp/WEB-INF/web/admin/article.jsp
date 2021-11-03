@@ -11,22 +11,17 @@
 <html lang="zh">
 <head>
     <title>Admin - Attachment - FishLand</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://localhost:8080/JavaWeb/">
-    <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
+    <%@ include file="../common/baseLib.jsp" %>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- tags CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/jquery-tagsinput/1.3.6/jquery.tagsinput.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="css/article.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
 <body>
-<form action="http://localhost:8080/JavaWeb/admin/API/article/insert" method="post">
+<form action="admin/API/article/insert" method="post">
     <input type="hidden" name="articleId" id="articleId" value="${articleId}"/>
     <input type="hidden" name="content" id="content"/>
     <input type="hidden" name="text" id="text"/>
@@ -141,12 +136,12 @@
 
     // 保存为草稿
     function draftSave() {
-        $('form').attr("action", "http://localhost:8080/JavaWeb/admin/API/article/insert/draft");
+        $('form').attr("action", "http://127.0.0.1:8080/JavaWeb/admin/API/article/insert/draft");
     }
 
     // 保存文章
     function insertArticle() {
-        $('form').attr("action", "http://localhost:8080/JavaWeb/admin/API/article/insert");
+        $('form').attr("action", "http://127.0.0.1:8080/JavaWeb/admin/API/article/insert");
     }
 
     function waitCon() {

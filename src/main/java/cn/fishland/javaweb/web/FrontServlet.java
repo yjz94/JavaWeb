@@ -77,7 +77,6 @@ public class FrontServlet extends HttpServlet {
     }
 
     private void index(HttpServletRequest req, HttpServletResponse resp) {
-
         // 获得参数
         String pageStr = req.getParameter("page");
         int page = 1;

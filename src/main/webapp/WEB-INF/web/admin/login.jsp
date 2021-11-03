@@ -10,17 +10,14 @@
 <!doctype html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="http://localhost:8080/JavaWeb/">
-    <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Login - FishLand</title>
+    <%@ include file="../common/baseLib.jsp" %>
+
     <!-- Site icon -->
     <link rel="icon" href="imgs/fishland.png" sizes="32x32" type="image/png">
     <!-- Custom styles -->
     <link href="css/login.css" rel="stylesheet">
 
-    <title>Login - FishLand</title>
 </head>
 <body class="text-center">
 <form class="form-signin" action="API/user/verify" method="post">
