@@ -20,10 +20,6 @@ public class StaticField {
     /** 存放草稿文章text的字段 */
     public static String ARTICLE_TEMP_TEXT_FIELD = "text";
 
-    /** 未上传文章上传附件的id（这里面存在删除和不用的） */
-    public static String ARTICLE_TEMP_ATTACHMENT_ID_LIST = "articleAttachmentList";
-
-
     /** 用户登录token存放key (谷歌验证码,字段固定不要随意改动) */
     public static String KAPTCHA_SESSION_KEY = "KAPTCHA_SESSION_KEY";
 

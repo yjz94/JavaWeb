@@ -3,9 +3,11 @@ package cn.fishland.javaweb.dao.impl;
 import cn.fishland.javaweb.bean.Attachment;
 import cn.fishland.javaweb.dao.AttachmentDao;
 import cn.fishland.javaweb.dao.BaseDao;
+import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.JdbcUtils;
 
 import java.sql.*;
+import java.util.List;
 
 /**
  * 附件数据库操作实现类
@@ -34,6 +36,8 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
             statement.setString(7, attachment.getMaster());
 
             statement.execute();
+
+            FunctionUtils.info(attachment.toString());
 
             return true;
         } catch (Exception e) {
@@ -90,17 +94,29 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
     }
 
     @Override
-    public int deleteAttachment(String... names) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("delete from attachment where 1=0 ");
-        for (String name : names) {
-            stringBuilder.append("or name = ? ");
+    public List<Attachment> queryAttachmentList(String master) {
+        String sql = "select * from attachment where master = ?";
+        return queryList(sql, master);
+    }
+
+    @Override
+    public int deleteAttachments(String... names) {
+        StringBuilder sql = new StringBuilder("delete from attachment where 0=1 ");
+        if (names != null && names.length > 0) {
+            for (int i = 0; i < names.length; i++) {
+                sql.append("or name=?");
+            }
+            sql.append(";");
+
+            boolean delete = delete(sql.toString(), names);
+            if (delete) {
+                return names.length;
+            } else {
+                return -1;
+            }
+        } else {
+            return 0;
         }
-        boolean delete = delete(stringBuilder.toString(), names);
-        if (delete) {
-            return names.length;
-        }
-        return -1;
     }
 
 }

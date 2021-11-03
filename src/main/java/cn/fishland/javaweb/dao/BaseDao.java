@@ -2,6 +2,7 @@ package cn.fishland.javaweb.dao;
 
 import cn.fishland.javaweb.util.JdbcUtils;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -110,7 +111,12 @@ public abstract class BaseDao<T> {
                             field = type.getSuperclass().getDeclaredField(columnLabel);
                         }
                         field.setAccessible(true);
-                        field.set(t, object);
+
+                        if ("file".equals(columnLabel)) {
+                            field.set(t, new SerialBlob((byte[]) object));
+                        } else {
+                            field.set(t, object);
+                        }
                     }
 
                     list.add(t);

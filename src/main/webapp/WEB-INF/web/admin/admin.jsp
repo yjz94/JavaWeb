@@ -64,7 +64,7 @@
                                     </a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="admin/articleManager" target="adminPage">
                                         <span data-feather="file-text"></span> 文章管理
                                     </a>
                                 </li>

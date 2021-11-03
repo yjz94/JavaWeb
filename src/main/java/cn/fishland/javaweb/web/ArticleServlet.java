@@ -129,7 +129,6 @@ public class ArticleServlet extends HttpServlet {
             RedisUtil.del(articleId);
             RedisUtil.del(StaticField.ARTICLE_TEMP_UUID_KEY);
 
-
             article(req, resp);
         } catch (Exception e) {
             e.printStackTrace();

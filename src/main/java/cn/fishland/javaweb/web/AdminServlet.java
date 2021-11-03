@@ -1,8 +1,12 @@
 package cn.fishland.javaweb.web;
 
+import cn.fishland.javaweb.bean.Article;
+import cn.fishland.javaweb.server.ArticleService;
+import cn.fishland.javaweb.server.impl.ArticleServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.RedisUtil;
 import cn.fishland.javaweb.util.StaticField;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +22,12 @@ import java.io.IOException;
  * @date 2021/10/20 7:42 下午
  */
 public class AdminServlet extends HttpServlet {
+
+    public static ArticleService articleService;
+
+    static {
+        articleService = new ArticleServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +50,18 @@ public class AdminServlet extends HttpServlet {
             case "/admin/login":
                 login(req, resp);
                 break;
+            case "/admin/articleManager":
+                articleManager(req, resp);
+                break;
             default:
+        }
+    }
+
+    private void articleManager(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            req.getRequestDispatcher("/WEB-INF/web/admin/articleManager.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -54,36 +75,48 @@ public class AdminServlet extends HttpServlet {
 
     private void article(HttpServletRequest req, HttpServletResponse resp) {
 
-        // 先判断是否存在草稿（redis中）
-        if (RedisUtil.exist(StaticField.ARTICLE_TEMP_UUID_KEY)) {
-            // 文章articleId
-            String articleId = RedisUtil.getString(StaticField.ARTICLE_TEMP_UUID_KEY);
+        // 判断是否是修改文章，修改文章会把草稿内容给覆盖，请注意
+        String articleId = req.getParameter("articleId");
+        String title = null;
+        String content = null;
+        String tags = null;
+        String text = null;
 
-            // 保存到与对象中
-
-            // 文章articleId
-            req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, articleId);
-
-            // 文章标题
-            req.setAttribute(StaticField.ARTICLE_TEMP_TITLE_FIELD,
-                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TITLE_FIELD));
-
-            // 文章内容
-            req.setAttribute(StaticField.ARTICLE_TEMP_CONTENT_FIELD,
-                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_CONTENT_FIELD));
-
-            // 文章标签
-            req.setAttribute(StaticField.ARTICLE_TEMP_TAGS_FIELD,
-                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TAGS_FIELD));
-
-            // 文章文本
-            req.setAttribute(StaticField.ARTICLE_TEMP_TEXT_FIELD,
-                    RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TEXT_FIELD));
-
+        if (StringUtils.isBlank(articleId)) {
+            // 先判断是否存在草稿（redis中）
+            if (RedisUtil.exist(StaticField.ARTICLE_TEMP_UUID_KEY)) {
+                // 文章articleId
+                articleId = RedisUtil.getString(StaticField.ARTICLE_TEMP_UUID_KEY);
+                // 文章标题
+                title = RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TITLE_FIELD);
+                // 文章内容
+                content = RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_CONTENT_FIELD);
+                // 文章标签
+                tags = RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TAGS_FIELD);
+                // 文章文本
+                text = RedisUtil.getHash(articleId, StaticField.ARTICLE_TEMP_TEXT_FIELD);
+            } else {
+                // 生成文章articleId
+                articleId = FunctionUtils.getUUID();
+            }
         } else {
-            // 文章articleId
-            req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, FunctionUtils.getUUID());
+            Article article = articleService.getArticleByArticleId(articleId);
+            title = article.getTitle();
+            content = article.getContent();
+            tags = article.getTags();
+            text = article.getText();
         }
+
+        // 文章articleId
+        req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, articleId);
+        // 文章标题
+        req.setAttribute(StaticField.ARTICLE_TEMP_TITLE_FIELD, title);
+        // 文章内容
+        req.setAttribute(StaticField.ARTICLE_TEMP_CONTENT_FIELD, content);
+        // 文章标签
+        req.setAttribute(StaticField.ARTICLE_TEMP_TAGS_FIELD, tags);
+        // 文章文本
+        req.setAttribute(StaticField.ARTICLE_TEMP_TEXT_FIELD, text);
 
         try {
             req.getRequestDispatcher("/WEB-INF/web/admin/article.jsp").forward(req, resp);

@@ -3,15 +3,12 @@ package cn.fishland.javaweb.server.impl;
 import cn.fishland.javaweb.bean.Article;
 import cn.fishland.javaweb.bean.Praise;
 import cn.fishland.javaweb.dao.ArticleDao;
-import cn.fishland.javaweb.dao.AttachmentDao;
 import cn.fishland.javaweb.dao.PraiseDao;
 import cn.fishland.javaweb.dao.impl.ArticleDaoImpl;
-import cn.fishland.javaweb.dao.impl.AttachmentDaoImpl;
 import cn.fishland.javaweb.dao.impl.PraiseDaoImpl;
 import cn.fishland.javaweb.server.ArticleService;
+import cn.fishland.javaweb.server.AttachmentService;
 import cn.fishland.javaweb.util.FunctionUtils;
-import cn.fishland.javaweb.util.RedisUtil;
-import cn.fishland.javaweb.util.StaticField;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
@@ -30,12 +27,12 @@ public class ArticleServiceImpl implements ArticleService {
 
     private static final ArticleDao articleDao;
     private static final PraiseDao praiseDao;
-    private static final AttachmentDao attachmentDao;
+    private static final AttachmentService attachmentService;
 
     static {
         articleDao = new ArticleDaoImpl();
-        attachmentDao = new AttachmentDaoImpl();
         praiseDao = new PraiseDaoImpl();
+        attachmentService = new AttachmentServiceImpl();
     }
 
     @Override
@@ -46,9 +43,10 @@ public class ArticleServiceImpl implements ArticleService {
         // 删除未使用附件
         List<String> attachmentNames =
                 FunctionUtils.matchAllString(article.getContent(), "[\\&|\\?]attachmentName\\=(.{32})");
-        List<String> strings = RedisUtil.listAll(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
-        strings.removeAll(attachmentNames);
-        attachmentDao.deleteAttachment(strings.toArray(new String[0]));
+
+        List<String> dbAttachmentNames = attachmentService.queryAttachmentNameByMaster(article.getArticleId());
+        dbAttachmentNames.removeAll(attachmentNames);
+        attachmentService.removeAttachmentByMaster(dbAttachmentNames.toArray(new String[0]));
 
         // 生成交互数据
         Praise praise = new Praise();
@@ -57,8 +55,6 @@ public class ArticleServiceImpl implements ArticleService {
         praise.setCreateDate(new Timestamp(System.currentTimeMillis()));
         praiseDao.savePraise(praise);
 
-        // 删除附件redis
-        RedisUtil.del(StaticField.ARTICLE_TEMP_ATTACHMENT_ID_LIST);
         return true;
     }
 

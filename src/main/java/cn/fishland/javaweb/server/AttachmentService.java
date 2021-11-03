@@ -2,6 +2,8 @@ package cn.fishland.javaweb.server;
 
 import cn.fishland.javaweb.bean.Attachment;
 
+import java.util.List;
+
 /**
  * 附件相服务
  *
@@ -26,5 +28,21 @@ public interface AttachmentService {
      * @return 附件对象
      */
     Attachment queryAttachment(String name);
+
+    /**
+     * 通过查询获得Attachment所以name
+     *
+     * @param master 主id
+     * @return name集合
+     */
+    List<String> queryAttachmentNameByMaster(String master);
+
+    /**
+     * 删除已存但未使用附件
+     *
+     * @param names 需要删除附件名称
+     * @return 执行成功条数
+     */
+    int removeAttachmentByMaster(String... names);
 
 }

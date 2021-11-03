@@ -2,6 +2,8 @@ package cn.fishland.javaweb.dao;
 
 import cn.fishland.javaweb.bean.Attachment;
 
+import java.util.List;
+
 /**
  * 附件数据库操作类
  *
@@ -29,11 +31,19 @@ public interface AttachmentDao {
     Attachment queryAttachment(String attachmentName);
 
     /**
+     * 根据master查询附件集合
+     *
+     * @param master 主id
+     * @return 附件集合
+     */
+    List<Attachment> queryAttachmentList(String master);
+
+    /**
      * 根据附件名称删除附件
      *
      * @param names 附加name数组
      * @return 成功数量
      */
-    int deleteAttachment(String... names);
+    int deleteAttachments(String... names);
 
 }
