@@ -39,9 +39,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public boolean save(Article article) {
+    public boolean save(Article article, String crudType) {
         // 保存文章内容
-        articleDao.save(article);
+        if ("insert".equals(crudType)) {
+            articleDao.save(article);
+        } else if ("update".equals(crudType)) {
+            articleDao.update(article);
+        }
 
         // 删除未使用附件
         List<String> attachmentNames =

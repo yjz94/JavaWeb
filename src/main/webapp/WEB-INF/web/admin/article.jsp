@@ -25,6 +25,7 @@
     <input type="hidden" name="articleId" id="articleId" value="${articleId}"/>
     <input type="hidden" name="content" id="content"/>
     <input type="hidden" name="text" id="text"/>
+    <input type="hidden" name="crudType" id="crudType" value="${crudType}"/>
 
     <div class="form-group">
         <label for="title">标题</label>
@@ -49,7 +50,9 @@
     <div class="form-group" style="text-align: center;">
         <button type="submit" class="btn btn-primary" onclick="insertArticle()">提交</button>
         <button type="button" class="btn btn-primary" onclick="waitCon()">预览</button>
-        <button type="submit" class="btn btn-primary" onclick="draftSave()">保存</button>
+        <c:if test="${crudType == 'insert'}">
+            <button type="submit" class="btn btn-primary" onclick="draftSave()">保存</button>
+        </c:if>
     </div>
 </form>
 <%--添加一个隐藏的iframe可以让form在提交时避免跳转--%>

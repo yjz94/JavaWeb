@@ -20,7 +20,7 @@ public interface ArticleService {
      * @param article 文章内容
      * @return 是否保存充成功
      */
-    boolean save(Article article);
+    boolean save(Article article,String crudType);
 
     /**
      * 根据articleId查询文章内容

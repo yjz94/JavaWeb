@@ -174,7 +174,7 @@
     hljs.highlightAll()
 
     function toUpdateArticle() {
-        location.href = "admin/article?articleId=" + $('#articleId').val()
+        location.href = "admin/article?crudType=update&articleId=" + $('#articleId').val()
     }
 
     function deleteArticle() {

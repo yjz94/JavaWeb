@@ -6,10 +6,7 @@ import cn.fishland.javaweb.dao.BaseDao;
 import cn.fishland.javaweb.dao.PraiseDao;
 import cn.fishland.javaweb.util.JdbcUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -47,7 +44,11 @@ public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
 
     @Override
     public int update(Article article) {
-        return 0;
+        String sql = "update article set updateDate = ?, content = ?, text = ?, title = ?, tags = ?, status = ? where "
+                + "articleId = ?";
+
+        return update(sql, new Timestamp(System.currentTimeMillis()), article.getContent(), article.getText(), article.getTitle()
+                , article.getTags(), article.getStatus(), article.getArticleId());
     }
 
     @Override

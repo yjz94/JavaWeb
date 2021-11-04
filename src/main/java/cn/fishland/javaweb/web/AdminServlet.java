@@ -97,6 +97,12 @@ public class AdminServlet extends HttpServlet {
 
         // 判断是否是修改文章，修改文章会把草稿内容给覆盖，请注意
         String articleId = req.getParameter("articleId");
+
+        String crudType = req.getParameter("crudType");
+        if (StringUtils.isBlank(crudType)) {
+            crudType = "insert";
+        }
+
         String title = null;
         String content = null;
         String tags = null;
@@ -137,6 +143,9 @@ public class AdminServlet extends HttpServlet {
         req.setAttribute(StaticField.ARTICLE_TEMP_TAGS_FIELD, tags);
         // 文章文本
         req.setAttribute(StaticField.ARTICLE_TEMP_TEXT_FIELD, text);
+
+        // 是修改还是新增
+        req.setAttribute("crudType", crudType);
 
         try {
             req.getRequestDispatcher("/WEB-INF/web/admin/article.jsp").forward(req, resp);

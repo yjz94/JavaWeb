@@ -171,6 +171,9 @@ public class ArticleServlet extends HttpServlet {
             String articleId = req.getParameter("articleId");
             String text = req.getParameter("text");
 
+            // 判断是修改还是新增
+            String crudType = req.getParameter("crudType");
+
             Article article = new Article();
             article.setArticleId(articleId);
             article.setStatus(1);
@@ -182,11 +185,13 @@ public class ArticleServlet extends HttpServlet {
             article.setUpdateDate(new Timestamp(System.currentTimeMillis()));
 
             // 保存内容到数据库中
-            boolean save = articleService.save(article);
+            boolean save = articleService.save(article, crudType);
 
             // 删除redis中草稿
-            RedisUtil.del(articleId);
-            RedisUtil.del(StaticField.ARTICLE_TEMP_UUID_KEY);
+            if ("insert".equals(crudType)) {
+                RedisUtil.del(articleId);
+                RedisUtil.del(StaticField.ARTICLE_TEMP_UUID_KEY);
+            }
 
             article(req, resp);
         } catch (Exception e) {
@@ -247,6 +252,8 @@ public class ArticleServlet extends HttpServlet {
             // 文章articleId
             req.setAttribute(StaticField.ARTICLE_TEMP_UUID_KEY, FunctionUtils.getUUID());
         }
+
+        req.setAttribute("crudType", "insert");
 
         try {
             req.getRequestDispatcher("/WEB-INF/web/admin/article.jsp").forward(req, resp);

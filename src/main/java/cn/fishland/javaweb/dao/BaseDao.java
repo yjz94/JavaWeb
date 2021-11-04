@@ -168,4 +168,21 @@ public abstract class BaseDao<T> {
         }
         return false;
     }
+
+    protected int update(String sql, Object... params) {
+        Connection connection = null;
+        try {
+            connection = JdbcUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.close(connection);
+        }
+        return -1;
+    }
 }
