@@ -104,7 +104,7 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
         StringBuilder sql = new StringBuilder("delete from attachment where 0=1 ");
         if (names != null && names.length > 0) {
             for (int i = 0; i < names.length; i++) {
-                sql.append("or name=?");
+                sql.append("or name=? ");
             }
             sql.append(";");
 
@@ -117,6 +117,27 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public int deleteAttachmentByMaster(String... articleIds) {
+        StringBuilder sql = new StringBuilder("delete from attachment where 0=1 ");
+        if (articleIds != null && articleIds.length > 0) {
+            for (int i = 0; i < articleIds.length; i++) {
+                sql.append("or master=? ");
+            }
+            sql.append(";");
+
+            boolean delete = delete(sql.toString(), articleIds);
+            if (delete) {
+                return articleIds.length;
+            } else {
+                return -1;
+            }
+        } else {
+            return 0;
+        }
+
     }
 
 }

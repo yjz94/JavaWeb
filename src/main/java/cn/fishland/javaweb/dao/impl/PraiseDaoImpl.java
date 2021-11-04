@@ -50,4 +50,24 @@ public class PraiseDaoImpl extends BaseDao<Praise> implements PraiseDao {
         return result == 1;
     }
 
+    @Override
+    public int delete(String... master) {
+        StringBuilder sql = new StringBuilder("delete from praise where 0=1 ");
+        if (master != null && master.length > 0) {
+            for (int i = 0; i < master.length; i++) {
+                sql.append("or master=? ");
+            }
+            sql.append(";");
+
+            boolean delete = delete(sql.toString(), master);
+            if (delete) {
+                return master.length;
+            } else {
+                return -1;
+            }
+        } else {
+            return 0;
+        }
+    }
+
 }

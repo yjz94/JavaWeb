@@ -8,6 +8,7 @@ import cn.fishland.javaweb.dao.impl.ArticleDaoImpl;
 import cn.fishland.javaweb.dao.impl.PraiseDaoImpl;
 import cn.fishland.javaweb.server.ArticleService;
 import cn.fishland.javaweb.server.AttachmentService;
+import cn.fishland.javaweb.server.PraiseService;
 import cn.fishland.javaweb.util.FunctionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,11 +28,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     private static final ArticleDao articleDao;
     private static final PraiseDao praiseDao;
+    private static final PraiseService praiseService;
     private static final AttachmentService attachmentService;
 
     static {
         articleDao = new ArticleDaoImpl();
         praiseDao = new PraiseDaoImpl();
+        praiseService = new PraiseServiceImpl();
         attachmentService = new AttachmentServiceImpl();
     }
 
@@ -80,6 +83,19 @@ public class ArticleServiceImpl implements ArticleService {
         map.put("count", count);
         map.put("pageNum", pageNum);
         return map;
+    }
+
+    @Override
+    public boolean deleteArticle(String articleId) {
+        try {
+            articleDao.delete(articleId);
+            praiseService.deletePraise(articleId);
+            attachmentService.deleteAttachment(articleId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

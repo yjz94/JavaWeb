@@ -44,4 +44,11 @@ public interface PraiseDao {
      */
     boolean savePraise(Praise praise);
 
+    /**
+     * 删除交互内容
+     *
+     * @param master 需要删除主的交互内容
+     * @return 影响行数
+     */
+    int delete(String... master);
 }

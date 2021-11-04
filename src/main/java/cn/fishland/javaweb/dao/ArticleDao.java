@@ -24,10 +24,10 @@ public interface ArticleDao {
     /**
      * 删除文章
      *
-     * @param article 删除条件
+     * @param articleId 删除条件
      * @return 影响行数
      */
-    int delete(Article article);
+    int delete(String articleId);
 
     /**
      * 修改文章内容

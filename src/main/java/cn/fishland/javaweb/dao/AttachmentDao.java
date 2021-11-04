@@ -46,4 +46,10 @@ public interface AttachmentDao {
      */
     int deleteAttachments(String... names);
 
+    /**
+     * 根据主文章删除附件
+     * @param articleIds 主文章id
+     * @return 影响行数
+     */
+    int deleteAttachmentByMaster(String... articleIds);
 }

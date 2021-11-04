@@ -37,4 +37,9 @@ public class PraiseServiceImpl implements PraiseService {
         return praiseDao.topPraise();
     }
 
+    @Override
+    public int deletePraise(String... master) {
+        return praiseDao.delete(master);
+    }
+
 }

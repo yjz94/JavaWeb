@@ -107,6 +107,14 @@
         <servlet-name>article</servlet-name>
         <url-pattern>/API/article/get</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/admin/API/article/show</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>article</servlet-name>
+        <url-pattern>/admin/API/article/delete</url-pattern>
+    </servlet-mapping>
 
     <!--AttachmentServlet相关-->
     <servlet-mapping>

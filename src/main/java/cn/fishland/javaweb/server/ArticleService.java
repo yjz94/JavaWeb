@@ -47,4 +47,11 @@ public interface ArticleService {
      */
     Map<String, Integer> articleCount();
 
+    /**
+     * 删除文章及相关内容
+     *
+     * @param articleId 文章id
+     * @return 是否成功
+     */
+    boolean deleteArticle(String articleId);
 }

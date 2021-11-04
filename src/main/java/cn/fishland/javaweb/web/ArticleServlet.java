@@ -9,6 +9,7 @@ import cn.fishland.javaweb.server.impl.PraiseServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.RedisUtil;
 import cn.fishland.javaweb.util.StaticField;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +62,64 @@ public class ArticleServlet extends HttpServlet {
             case "/API/article/get":
                 getArticle(req, resp);
                 break;
+            case "/admin/API/article/show":
+                show(req, resp);
+                break;
+            case "/admin/API/article/delete":
+                delete(req, resp);
+                break;
             default:
+        }
+    }
+
+    private void delete(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            String articleId = req.getParameter("articleId");
+            Map<String, Object> map = new HashMap<>(3);
+            if (StringUtils.isBlank(articleId)) {
+                map.put("error", 1);
+            } else {
+                boolean b = articleService.deleteArticle(articleId);
+                if (b) {
+                    map.put("error", 0);
+                } else {
+                    map.put("error", 1);
+                }
+            }
+            resp.getWriter().println(JSONObject.toJSONString(map));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void show(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            resp.setCharacterEncoding("UTF-8");
+
+            String articleId = req.getParameter("articleId");
+            Map<String, Object> map = new HashMap<>(3);
+            if (StringUtils.isBlank(articleId)) {
+                map.put("error", 1);
+
+            } else {
+                Article article = articleService.getArticleByArticleId(articleId);
+
+                // 获得文章praise
+                Praise praise = new Praise();
+                Praise queryPraise = praiseService.getPraiseByMaster(articleId);
+                if (queryPraise != null) {
+                    praise = queryPraise;
+                }
+                map.put("error", 0);
+                map.put("article", article);
+                map.put("praise", praise);
+            }
+
+            resp.setContentType("application/json");
+            PrintWriter writer = resp.getWriter();
+            writer.print(JSONObject.toJSONString(map));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,13 +1,15 @@
 package cn.fishland.javaweb.dao.impl;
 
 import cn.fishland.javaweb.bean.Article;
-import cn.fishland.javaweb.bean.Praise;
 import cn.fishland.javaweb.dao.ArticleDao;
 import cn.fishland.javaweb.dao.BaseDao;
 import cn.fishland.javaweb.dao.PraiseDao;
 import cn.fishland.javaweb.util.JdbcUtils;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -34,7 +36,12 @@ public class ArticleDaoImpl extends BaseDao<Article> implements ArticleDao {
     }
 
     @Override
-    public int delete(Article article) {
+    public int delete(String articleId) {
+        String sql = "delete from article where articleId = ?";
+        boolean delete = delete(sql, articleId);
+        if (delete) {
+            return 1;
+        }
         return 0;
     }
 

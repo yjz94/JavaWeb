@@ -161,7 +161,7 @@
     function iframeLoad() {
         document.getElementById("adminPage").height = 0;
         document.getElementById("adminPage").height =
-            document.getElementById("adminPage").contentWindow.document.body.scrollHeight + 50;
+            document.getElementById("adminPage").contentWindow.document.body.scrollHeight + 20;
     }
 
     window.onload = function () {

@@ -35,4 +35,11 @@ public interface PraiseService {
      */
     Praise topArticle();
 
+    /**
+     * 删除交互内容
+     * @param master
+     * @return 执行条数
+     */
+    int deletePraise(String... master);
+
 }

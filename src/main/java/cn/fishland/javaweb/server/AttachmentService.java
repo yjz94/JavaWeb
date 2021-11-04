@@ -45,4 +45,11 @@ public interface AttachmentService {
      */
     int removeAttachmentByMaster(String... names);
 
+    /**
+     * 删除与主相关附件
+     *
+     * @param articleIds 主id
+     * @return 影响行数
+     */
+    int deleteAttachment(String... articleIds);
 }

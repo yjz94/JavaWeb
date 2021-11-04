@@ -2,7 +2,9 @@ package cn.fishland.javaweb.web;
 
 import cn.fishland.javaweb.bean.Article;
 import cn.fishland.javaweb.server.ArticleService;
+import cn.fishland.javaweb.server.PraiseService;
 import cn.fishland.javaweb.server.impl.ArticleServiceImpl;
+import cn.fishland.javaweb.server.impl.PraiseServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.RedisUtil;
 import cn.fishland.javaweb.util.StaticField;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 后台控制类
@@ -24,9 +27,11 @@ import java.io.IOException;
 public class AdminServlet extends HttpServlet {
 
     public static ArticleService articleService;
+    public static PraiseService praiseService;
 
     static {
         articleService = new ArticleServiceImpl();
+        praiseService = new PraiseServiceImpl();
     }
 
     @Override
@@ -59,6 +64,21 @@ public class AdminServlet extends HttpServlet {
 
     private void articleManager(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            // 获得参数
+            String pageStr = req.getParameter("page");
+            int page = 1;
+            if (StringUtils.isNotBlank(pageStr)) {
+                page = Integer.parseInt(pageStr);
+            }
+            String numStr = req.getParameter("num");
+            int num = 20;
+            if (StringUtils.isNotBlank(numStr)) {
+                num = Integer.parseInt(numStr);
+            }
+            List<Article> articles = articleService.articleList(page, num);
+
+            req.setAttribute("articles", articles);
+
             req.getRequestDispatcher("/WEB-INF/web/admin/articleManager.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();

@@ -54,4 +54,9 @@ public class AttachmentServiceImpl implements cn.fishland.javaweb.server.Attachm
         return attachmentDao.deleteAttachments(names);
     }
 
+    @Override
+    public int deleteAttachment(String... articleIds) {
+        return attachmentDao.deleteAttachmentByMaster(articleIds);
+    }
+
 }
