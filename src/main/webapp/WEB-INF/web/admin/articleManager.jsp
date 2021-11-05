@@ -59,19 +59,24 @@
         <td>${article.status==1?'启用':'禁用'}</td>
     </tr>
     </c:forEach>
-
 </table>
 
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        <li class="page-item ${pageMap.previous == null?'disabled':''}">
+            <a class="page-link" onclick="showArticlePage('admin/articleManager?num=20&page=${pageMap.previous}')"
+               aria-disabled="true">上一页</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+        <c:forEach items="${pageMap.item}" var="item">
+            <li class="page-item">
+                <a class="page-link" onclick="showArticlePage('admin/articleManager?num=20&page=${item}')">
+                        ${item}
+                </a>
+            </li>
+        </c:forEach>
+        <li class="page-item ${pageMap.next == null?'disabled':''}">
+            <a class="page-link"
+               onclick="showArticlePage('admin/articleManager?num=20&page=${pageMap.previous}')">下一页</a>
         </li>
     </ul>
 </nav>
@@ -193,6 +198,9 @@
         });
     }
 
+    function showArticlePage(url) {
+        location.href = url
+    }
 </script>
 </body>
 </html>

@@ -20,7 +20,7 @@ public interface ArticleService {
      * @param article 文章内容
      * @return 是否保存充成功
      */
-    boolean save(Article article,String crudType);
+    boolean save(Article article, String crudType);
 
     /**
      * 根据articleId查询文章内容
@@ -54,4 +54,12 @@ public interface ArticleService {
      * @return 是否成功
      */
     boolean deleteArticle(String articleId);
+
+    /**
+     * 获得文章分页情况
+     *
+     * @param num 每页条数
+     * @return 数据集合
+     */
+    Map<String, Object> articlePageNum(String baseUrl, int page, int num);
 }

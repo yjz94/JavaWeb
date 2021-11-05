@@ -20,6 +20,8 @@ public class RedisUtil {
     private static final JedisPool POOL;
 
     static {
+        FunctionUtils.info("init redis pool start.");
+
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMaxTotal(1024);
         poolConfig.setMaxIdle(100);
@@ -28,6 +30,8 @@ public class RedisUtil {
         poolConfig.setTestOnBorrow(false);
         poolConfig.setTestOnReturn(true);
         POOL = new JedisPool(poolConfig, "127.0.0.1", 6379);
+
+        FunctionUtils.info("init redis pool end.");
     }
 
     public static Jedis getJedis() {
@@ -40,12 +44,16 @@ public class RedisUtil {
     }
 
     public static void setString(String key, String val) {
+        FunctionUtils.info("save redis key:" + key + ",value:" + val);
         Jedis jedis = null;
         try {
             jedis = getJedis();
-            jedis.set(key, val);
+            FunctionUtils.info("save redis jedis:" + jedis);
+            String set = jedis.set(key, val);
+            FunctionUtils.info("save redis key result:" + set);
         } catch (Exception e) {
             e.printStackTrace();
+            FunctionUtils.info("RedisUtil.setString:" + e.getMessage());
         } finally {
             close(jedis);
         }

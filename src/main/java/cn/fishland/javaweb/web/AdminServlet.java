@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 后台控制类
@@ -75,9 +76,15 @@ public class AdminServlet extends HttpServlet {
             if (StringUtils.isNotBlank(numStr)) {
                 num = Integer.parseInt(numStr);
             }
+
+            // 获得文章
             List<Article> articles = articleService.articleList(page, num);
 
+            // 获得页数信息
+            Map<String, Object> pageMap = articleService.articlePageNum(getInitParameter("baseUrl"), page, num);
+
             req.setAttribute("articles", articles);
+            req.setAttribute("pageMap", pageMap);
 
             req.getRequestDispatcher("/WEB-INF/web/admin/articleManager.jsp").forward(req, resp);
         } catch (Exception e) {

@@ -13,9 +13,7 @@ import cn.fishland.javaweb.util.FunctionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 文章相关服务实现类
@@ -100,6 +98,51 @@ public class ArticleServiceImpl implements ArticleService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public Map<String, Object> articlePageNum(String baseUrl, int page, int num) {
+        int i = articleDao.countArticle();
+        int pageCount = (i + num) / num;
+        Map<String, Object> hashMap = new HashMap<>(3);
+
+        if (pageCount == 1) {
+            hashMap.put("previous", null);
+            hashMap.put("next", null);
+            hashMap.put("item", Collections.singletonList(1));
+        }
+
+        if (pageCount > 1 && pageCount <= 5) {
+            if (page == 1) {
+                hashMap.put("previous", null);
+            } else {
+                hashMap.put("previous", page - 1);
+                List<Integer> list = new ArrayList<>();
+                for (int i1 = 1; i1 <= pageCount; i1++) {
+                    list.add(i1);
+                }
+                hashMap.put("item", list);
+                hashMap.put("next", null);
+            }
+        } else {
+            if (page == 1) {
+                hashMap.put("previous", null);
+            } else {
+                hashMap.put("previous", page - 1);
+                List<Integer> list = new ArrayList<>();
+                for (int i1 = page; i1 <= ((pageCount - page) > 5 ? page + 5 : pageCount); i1++) {
+                    list.add(i1);
+                }
+                hashMap.put("item", list);
+                if (pageCount == page) {
+                    hashMap.put("next", null);
+                } else {
+                    hashMap.put("next", page + 1);
+                }
+            }
+
+        }
+        return hashMap;
     }
 
 }

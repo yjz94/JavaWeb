@@ -139,12 +139,12 @@
 
     // 保存为草稿
     function draftSave() {
-        $('form').attr("action", "http://127.0.0.1:8080/JavaWeb/admin/API/article/insert/draft");
+        $('form').attr("action", "${initParam.baseUrl}admin/API/article/insert/draft");
     }
 
     // 保存文章
     function insertArticle() {
-        $('form').attr("action", "http://127.0.0.1:8080/JavaWeb/admin/API/article/insert");
+        $('form').attr("action", "${initParam.baseUrl}admin/API/article/insert");
     }
 
     function waitCon() {
