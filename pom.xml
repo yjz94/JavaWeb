@@ -20,6 +20,12 @@
     </properties>
 
     <dependencies>
+        <!-- apache collection -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
 
         <!-- apache beanutils2 -->
         <dependency>
@@ -66,7 +72,6 @@
             <artifactId>taglibs-standard-spec</artifactId>
             <version>1.2.5</version>
         </dependency>
-
 
         <!-- 阿里处理json工具类 -->
         <dependency>

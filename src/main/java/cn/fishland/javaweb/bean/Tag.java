@@ -1,5 +1,9 @@
 package cn.fishland.javaweb.bean;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.sql.Timestamp;
+
 /**
  * 标签类
  *
@@ -13,12 +17,24 @@ public class Tag extends BasBean {
     private String master;
     private Integer status;
 
+    public Tag() {
+    }
+
+    public Tag(Timestamp createDate, String name, String master, Integer status) {
+        super.createDate = createDate;
+        this.name = name.toLowerCase();
+        this.master = master;
+        this.status = status;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (StringUtils.isNotBlank(name)) {
+            this.name = name.toLowerCase();
+        }
     }
 
     public String getMaster() {

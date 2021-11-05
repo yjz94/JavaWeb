@@ -2,6 +2,7 @@ package cn.fishland.javaweb.server.impl;
 
 import cn.fishland.javaweb.bean.Article;
 import cn.fishland.javaweb.bean.Praise;
+import cn.fishland.javaweb.bean.Tag;
 import cn.fishland.javaweb.dao.ArticleDao;
 import cn.fishland.javaweb.dao.PraiseDao;
 import cn.fishland.javaweb.dao.impl.ArticleDaoImpl;
@@ -9,7 +10,9 @@ import cn.fishland.javaweb.dao.impl.PraiseDaoImpl;
 import cn.fishland.javaweb.server.ArticleService;
 import cn.fishland.javaweb.server.AttachmentService;
 import cn.fishland.javaweb.server.PraiseService;
+import cn.fishland.javaweb.server.TagService;
 import cn.fishland.javaweb.util.FunctionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
@@ -28,12 +31,14 @@ public class ArticleServiceImpl implements ArticleService {
     private static final PraiseDao praiseDao;
     private static final PraiseService praiseService;
     private static final AttachmentService attachmentService;
+    private static final TagService tagService;
 
     static {
         articleDao = new ArticleDaoImpl();
         praiseDao = new PraiseDaoImpl();
         praiseService = new PraiseServiceImpl();
         attachmentService = new AttachmentServiceImpl();
+        tagService = new TagServiceImpl();
     }
 
     @Override
@@ -48,10 +53,11 @@ public class ArticleServiceImpl implements ArticleService {
         // 删除未使用附件
         List<String> attachmentNames =
                 FunctionUtils.matchAllString(article.getContent(), "[\\&|\\?]attachmentName\\=(.{32})");
-
         List<String> dbAttachmentNames = attachmentService.queryAttachmentNameByMaster(article.getArticleId());
-        dbAttachmentNames.removeAll(attachmentNames);
-        attachmentService.removeAttachmentByMaster(dbAttachmentNames.toArray(new String[0]));
+        if (CollectionUtils.isNotEmpty(dbAttachmentNames)) {
+            dbAttachmentNames.removeAll(attachmentNames);
+            attachmentService.removeAttachmentByMaster(dbAttachmentNames.toArray(new String[0]));
+        }
 
         // 生成交互数据
         Praise praise = new Praise();
@@ -59,6 +65,21 @@ public class ArticleServiceImpl implements ArticleService {
         praise.setStatus(1);
         praise.setCreateDate(new Timestamp(System.currentTimeMillis()));
         praiseDao.savePraise(praise);
+
+        // 保存标签
+        String tags = article.getTags();
+        if (StringUtils.isNotBlank(tags)) {
+            List<Tag> list = new ArrayList<>();
+            String[] split = tags.split(",");
+            for (String name : split) {
+                list.add(new Tag(new Timestamp(System.currentTimeMillis()), name, article.getArticleId(), 1));
+            }
+            if (CollectionUtils.isNotEmpty(list)) {
+                for (Tag tag : list) {
+                    tagService.insert(tag);
+                }
+            }
+        }
 
         return true;
     }

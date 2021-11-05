@@ -140,10 +140,8 @@ public abstract class BaseDao<T> {
             for (int i = 0; i < params.length; i++) {
                 statement.setObject(i + 1, params[i]);
             }
-            boolean execResult = statement.execute();
-            if (execResult) {
-                return 1;
-            }
+            statement.execute();
+            return 1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -160,7 +158,8 @@ public abstract class BaseDao<T> {
             for (int i = 0; i < params.length; i++) {
                 statement.setObject(i + 1, params[i]);
             }
-            return statement.execute();
+            statement.execute();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
