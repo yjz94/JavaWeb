@@ -3,9 +3,12 @@ package cn.fishland.javaweb.server.impl;
 import cn.fishland.javaweb.bean.Attachment;
 import cn.fishland.javaweb.dao.AttachmentDao;
 import cn.fishland.javaweb.dao.impl.AttachmentDaoImpl;
+import cn.fishland.javaweb.util.FunctionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 附件服务操作实现类
@@ -57,6 +60,17 @@ public class AttachmentServiceImpl implements cn.fishland.javaweb.server.Attachm
     @Override
     public int deleteAttachment(String... articleIds) {
         return attachmentDao.deleteAttachmentByMaster(articleIds);
+    }
+
+    @Override
+    public List<Attachment> attachmentList(int page, int num) {
+        return attachmentDao.queryAttachmentList(page, num);
+    }
+
+    @Override
+    public Map<String, Object> attachmentPagination(int page, int num) {
+        int count = attachmentDao.queryAttachmentCount();
+        return FunctionUtils.pagination(count, page, num);
     }
 
 }

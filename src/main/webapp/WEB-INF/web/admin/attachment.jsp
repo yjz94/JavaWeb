@@ -15,8 +15,6 @@
 
     <!-- admin css -->
     <link href="css/attachment.css" rel="stylesheet">
-
-    <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
 </head>
 <body>
 <div>
@@ -37,12 +35,12 @@
 <div style="width: 100%;background-color: #1b1e21;height: 1px; margin: 10px 0;"></div>
 <div>
     <div class="row row-cols-4">
-        <c:forEach begin="0" end="10" var="i">
+        <c:forEach items="${list}" var="item">
             <div class="col">
                 <div class="card" style="width: 18rem; margin: 10px;">
-                    <img src="../../../imgs/temp1.png" class="card-img-top" alt="...">
+                    <img src="API/attachment/show?attachmentName=${item.name}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">attment${i}</h5>
+                        <h5 class="card-title">attment</h5>
                         <p class="card-text">这是附件的简......</p>
                     </div>
                 </div>
@@ -53,23 +51,31 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        <li class="page-item ${map.previous == null?'disabled':''}">
+            <a class="page-link" onclick="showArticlePage('admin/attachment?page=${map.previous}')"
+               aria-disabled="true">上一页</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+        <c:forEach items="${map.item}" var="item">
+            <li class="page-item ${map.disabled == item ? 'active':''}">
+                <a class="page-link"
+                   onclick="showArticlePage('admin/attachment?page=${item}')">
+                        ${item}
+                </a>
+            </li>
+        </c:forEach>
+        <li class="page-item ${map.next == null?'disabled':''}">
+            <a class="page-link"
+               onclick="showArticlePage('admin/attachment?page=${map.next}')">下一页</a>
         </li>
     </ul>
 </nav>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<%--图标--%>
-<script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
-<script src="js/admin.js"></script>
+<script>
+    function showArticlePage(url) {
+        location.href = url
+    }
+</script>
 </body>
 </html>

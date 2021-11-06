@@ -48,8 +48,25 @@ public interface AttachmentDao {
 
     /**
      * 根据主文章删除附件
+     *
      * @param articleIds 主文章id
      * @return 影响行数
      */
     int deleteAttachmentByMaster(String... articleIds);
+
+    /**
+     * 分页获得附件内容
+     *
+     * @param page 当前页数
+     * @param num  每页显示数
+     * @return 附件集合
+     */
+    List<Attachment> queryAttachmentList(int page, int num);
+
+    /**
+     * 获得附件总页数
+     *
+     * @return 附件集合
+     */
+    int queryAttachmentCount();
 }

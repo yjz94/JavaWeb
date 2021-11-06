@@ -65,20 +65,20 @@
     <ul class="pagination justify-content-center">
         <ul class="pagination justify-content-center my-4">
             <li class="page-item ${map.previous == null?'disabled':''}">
-                <a class="page-link" onclick="showArticlePage('index?page=${map.previous}')"
+                <a class="page-link" onclick="showArticlePage('admin/articleManager?page=${map.previous}')"
                    aria-disabled="true">上一页</a>
             </li>
             <c:forEach items="${map.item}" var="item">
                 <li class="page-item ${map.disabled == item ? 'active':''}">
                     <a class="page-link"
-                       onclick="showArticlePage('index?page=${item}')">
+                       onclick="showArticlePage('admin/articleManager?page=${item}')">
                             ${item}
                     </a>
                 </li>
             </c:forEach>
             <li class="page-item ${map.next == null?'disabled':''}">
                 <a class="page-link"
-                   onclick="showArticlePage('index?page=${map.next}')">下一页</a>
+                   onclick="showArticlePage('admin/articleManager?page=${map.next}')">下一页</a>
             </li>
         </ul>
     </ul>

@@ -3,6 +3,7 @@ package cn.fishland.javaweb.server;
 import cn.fishland.javaweb.bean.Attachment;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 附件相服务
@@ -52,4 +53,22 @@ public interface AttachmentService {
      * @return 影响行数
      */
     int deleteAttachment(String... articleIds);
+
+    /**
+     * 获得当前页附件所有名称
+     *
+     * @param page 当前页数
+     * @param num  每页显示数
+     * @return 附件名称集合
+     */
+    List<Attachment> attachmentList(int page, int num);
+
+    /**
+     * 获得附件分页内容
+     *
+     * @param page 当前页数
+     * @param num  每页显示数
+     * @return 页码显示集合
+     */
+    Map<String, Object> attachmentPagination(int page, int num);
 }

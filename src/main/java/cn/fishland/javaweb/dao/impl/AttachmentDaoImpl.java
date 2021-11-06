@@ -140,4 +140,27 @@ public class AttachmentDaoImpl extends BaseDao<Attachment> implements Attachment
 
     }
 
+    @Override
+    public List<Attachment> queryAttachmentList(int page, int num) {
+        int begin = (page - 1) * num;
+        String sql = String.format("select * from attachment where status = 1 limit %d,%d", begin, num);
+        return queryList(sql, null);
+    }
+
+    @Override
+    public int queryAttachmentCount() {
+        try {
+            String sql = "select count(1) from attachment";
+            Connection connection = JdbcUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 }

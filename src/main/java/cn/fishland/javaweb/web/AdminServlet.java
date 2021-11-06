@@ -1,9 +1,12 @@
 package cn.fishland.javaweb.web;
 
 import cn.fishland.javaweb.bean.Article;
+import cn.fishland.javaweb.bean.Attachment;
 import cn.fishland.javaweb.server.ArticleService;
+import cn.fishland.javaweb.server.AttachmentService;
 import cn.fishland.javaweb.server.PraiseService;
 import cn.fishland.javaweb.server.impl.ArticleServiceImpl;
+import cn.fishland.javaweb.server.impl.AttachmentServiceImpl;
 import cn.fishland.javaweb.server.impl.PraiseServiceImpl;
 import cn.fishland.javaweb.util.FunctionUtils;
 import cn.fishland.javaweb.util.RedisUtil;
@@ -29,10 +32,12 @@ public class AdminServlet extends HttpServlet {
 
     public static ArticleService articleService;
     public static PraiseService praiseService;
+    public static AttachmentService attachmentService;
 
     static {
         articleService = new ArticleServiceImpl();
         praiseService = new PraiseServiceImpl();
+        attachmentService = new AttachmentServiceImpl();
     }
 
     @Override
@@ -162,6 +167,25 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void attachment(HttpServletRequest req, HttpServletResponse resp) {
+        // 获得参数
+        String pageStr = req.getParameter("page");
+        int page = 1;
+        if (StringUtils.isNotBlank(pageStr)) {
+            page = Integer.parseInt(pageStr);
+        }
+        String numStr = req.getParameter("num");
+        int num = 20;
+        if (StringUtils.isNotBlank(numStr)) {
+            num = Integer.parseInt(numStr);
+        }
+
+        List<Attachment> list = attachmentService.attachmentList(page, num);
+
+        Map<String, Object> map = attachmentService.attachmentPagination(page, num);
+
+        req.setAttribute("list", list);
+        req.setAttribute("map", map);
+
         try {
             req.getRequestDispatcher("/WEB-INF/web/admin/attachment.jsp").forward(req, resp);
         } catch (Exception e) {
