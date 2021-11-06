@@ -91,17 +91,22 @@
                     <nav aria-label="Pagination">
                         <hr class="my-0"/>
                         <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
+                            <li class="page-item ${map.previous == null?'disabled':''}">
+                                <a class="page-link" onclick="showArticlePage('index?page=${map.previous}')"
+                                   aria-disabled="true">上一页</a>
                             </li>
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="#!">1</a>
+                            <c:forEach items="${map.item}" var="item">
+                                <li class="page-item ${map.disabled == item ? 'active':''}">
+                                    <a class="page-link"
+                                       onclick="showArticlePage('index?page=${item}')">
+                                            ${item}
+                                    </a>
+                                </li>
+                            </c:forEach>
+                            <li class="page-item ${map.next == null?'disabled':''}">
+                                <a class="page-link"
+                                   onclick="showArticlePage('index?page=${map.next}')">下一页</a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">下一页</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -205,6 +210,10 @@
         // 开启feather图标的渲染
         feather.replace()
     })()
+
+    function showArticlePage(url) {
+        location.href = url
+    }
 </script>
 </body>
 </html>

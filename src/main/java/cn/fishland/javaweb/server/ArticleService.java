@@ -45,7 +45,7 @@ public interface ArticleService {
      *
      * @return 双列集合
      */
-    Map<String, Integer> articleCount();
+    Map<String, Object> articleCount(int page, int num);
 
     /**
      * 删除文章及相关内容
@@ -58,8 +58,9 @@ public interface ArticleService {
     /**
      * 获得文章分页情况
      *
-     * @param num 每页条数
+     * @param page 当前页数
+     * @param num  每页条数
      * @return 数据集合
      */
-    Map<String, Object> articlePageNum(String baseUrl, int page, int num);
+    Map<String, Object> articlePageNum(int page, int num);
 }

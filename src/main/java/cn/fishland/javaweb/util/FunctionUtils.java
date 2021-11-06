@@ -5,9 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,5 +85,54 @@ public class FunctionUtils {
 
     public static void info(String log) {
         logger.log(Level.INFO, log);
+    }
+
+    /**
+     * 根据条数，页数和每页显示数获得分页显示内容
+     * 返回值：
+     * previous：上一页，为null表示没有
+     * item：需要显示的index
+     * previous：下一页，为null表示没有
+     *
+     * @param count 内容行数（条数）
+     * @param page  当前页数
+     * @param num   每页显示数
+     * @return 内容双列集合
+     */
+    public static Map<String, Object> pagination(int count, int page, int num) {
+        int pageNum = (count + num - 1) / num;
+        if (pageNum == 0) {
+            info("table count is zero");
+            return null;
+        }
+        Map<String, Object> map = new HashMap<>(3);
+
+        map.put("previous", page - 1 < 1 ? null : page - 1);
+
+        int begin = page;
+        int end = page;
+        if (pageNum <= 5) {
+            begin = 1;
+            end = pageNum;
+        } else {
+            for (int i = 0; i < 4; i++) {
+                end += 1;
+                if (end > pageNum) {
+                    end -= 1;
+                    begin -= 1;
+                }
+            }
+        }
+        List<Integer> list = new ArrayList<>();
+        for (int i = begin; i <= end; i++) {
+            list.add(i);
+        }
+        map.put("item", list);
+
+        map.put("next", page + 1 > pageNum ? null : page + 1);
+
+        map.put("disabled", page);
+
+        return map;
     }
 }

@@ -81,10 +81,10 @@ public class AdminServlet extends HttpServlet {
             List<Article> articles = articleService.articleList(page, num);
 
             // 获得页数信息
-            Map<String, Object> pageMap = articleService.articlePageNum(getInitParameter("baseUrl"), page, num);
+            Map<String, Object> map = articleService.articlePageNum(page, num);
 
             req.setAttribute("articles", articles);
-            req.setAttribute("pageMap", pageMap);
+            req.setAttribute("map", map);
 
             req.getRequestDispatcher("/WEB-INF/web/admin/articleManager.jsp").forward(req, resp);
         } catch (Exception e) {

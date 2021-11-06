@@ -63,21 +63,24 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-        <li class="page-item ${pageMap.previous == null?'disabled':''}">
-            <a class="page-link" onclick="showArticlePage('admin/articleManager?num=20&page=${pageMap.previous}')"
-               aria-disabled="true">上一页</a>
-        </li>
-        <c:forEach items="${pageMap.item}" var="item">
-            <li class="page-item">
-                <a class="page-link" onclick="showArticlePage('admin/articleManager?num=20&page=${item}')">
-                        ${item}
-                </a>
+        <ul class="pagination justify-content-center my-4">
+            <li class="page-item ${map.previous == null?'disabled':''}">
+                <a class="page-link" onclick="showArticlePage('index?page=${map.previous}')"
+                   aria-disabled="true">上一页</a>
             </li>
-        </c:forEach>
-        <li class="page-item ${pageMap.next == null?'disabled':''}">
-            <a class="page-link"
-               onclick="showArticlePage('admin/articleManager?num=20&page=${pageMap.previous}')">下一页</a>
-        </li>
+            <c:forEach items="${map.item}" var="item">
+                <li class="page-item ${map.disabled == item ? 'active':''}">
+                    <a class="page-link"
+                       onclick="showArticlePage('index?page=${item}')">
+                            ${item}
+                    </a>
+                </li>
+            </c:forEach>
+            <li class="page-item ${map.next == null?'disabled':''}">
+                <a class="page-link"
+                   onclick="showArticlePage('index?page=${map.next}')">下一页</a>
+            </li>
+        </ul>
     </ul>
 </nav>
 
